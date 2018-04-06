@@ -1,1 +1,1 @@
-web: gunicorn dog_odel.wsgi --log-file -
+web: gunicorn Dog.wsgi --log-file -

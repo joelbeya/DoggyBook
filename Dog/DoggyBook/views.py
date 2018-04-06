@@ -10,17 +10,17 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
     objets = Chien.objects.order_by('-created_at');
-    return render(request, 'dogo/index.html', {'objets':objets})
+    return render(request, 'DoggyBook/index.html', {'objets':objets})
 
 def requete(request,obj):
     identifier = getattr(sys.modules[__name__], obj)
     objets = identifier.all()
-    return render(request, 'dogo/requete.html', {'objets':objets})
+    return render(request, 'DoggyBook/requete.html', {'objets':objets})
 
 def show(request, obj, key):
     identifier = getattr(sys.modules[__name__], obj)
     objet = identifier.find(int(key))
-    return render(request, 'dogo/show.html', {'objet':objet})
+    return render(request, 'DoggyBook/show.html', {'objet':objet})
 
 def subscribe(request):
     mail = request.POST['mail']
@@ -31,7 +31,7 @@ def subscribe(request):
     date_naissance = request.POST['birth']
     
     User.objects.create(mail=mail, password=password, nom=nom, prenom=prenom, sexe=sexe, date_naissance=date_naissance)
-    return redirect('/dogo/index')
+    return redirect('/DoggyBook/index')
 
 def log(request):
     try:
@@ -41,7 +41,7 @@ def log(request):
 
     if check_password(request.POST['password'], m.password):
         request.session['id'] = m.id
-        return redirect('/dogo/index')
+        return redirect('/DoggyBook/index')
     else:
         return HttpResponse("Your username and password didn't match.")
 

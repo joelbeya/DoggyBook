@@ -7,12 +7,10 @@
       <pre>
         {% for objet in objets %}
           <h1> {{objet.id}}. {{objet.nom|upper}} {{objet.couleur_yeux|truncatewords:2}}</h1>
-          <!--a href="/dogo/dog/{{doga.id}}">{{doga.id}}/ {{doga.title|upper}} {{doga.body|truncatewords:2}}</a-->
         {% endfor %}
       </pre>
     </h7>
 
-   <h1> {{ request.session.id }} </h1>
    <a href="{% url 'home' %}">Bon zonga ndaku, Rwandais !</a>
 
   {% endblock content %}

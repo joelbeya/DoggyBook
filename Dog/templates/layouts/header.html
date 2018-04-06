@@ -7,13 +7,13 @@
         </ul>
         {% if user.is_authenticated %}
         <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>{{user.name}}</a></li>
-            <li><a data-toggle="modal" href="/DoggyBook/logout"><span class="glyphicon glyphicon-log-in"></span>Deconnexion</a></li>
+            <li><a data-toggle="modal" href="doggybook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>{{user.name}}</a></li>
+            <li><a data-toggle="modal" href="/doggybook/logout"><span class="glyphicon glyphicon-log-in"></span>Deconnexion</a></li>
         </ul>
         {% else %}
         <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>Inscription</a></li>
-            <li><a data-toggle="modal" href="DoggyBook/login views.formu_submit #modal_connexion"><span class="glyphicon glyphicon-log-in"></span>Connexion</a></li>
+            <li><a data-toggle="modal" href="doggybook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>Inscription</a></li>
+            <li><a data-toggle="modal" href="doggybook/login views.formu_submit #modal_connexion"><span class="glyphicon glyphicon-log-in"></span>Connexion</a></li>
         </ul>
         {% endif %}
     </div>
