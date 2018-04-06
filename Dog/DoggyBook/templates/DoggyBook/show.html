@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+
+    {% block content %}
+    	{% for obj in objet %}
+          	<h1>Objet {{obj.id}} detail  </h1>
+    		<h2>{{obj.nom}}</h2>
+        {% endfor %}
+
+    	<p>
+      		<a href="{% url 'DoggyBook:index' %}">Joel Beya</a>
+    	</p>
+    {% endblock content %}

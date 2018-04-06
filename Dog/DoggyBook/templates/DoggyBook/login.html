@@ -1,0 +1,22 @@
+<form class="connexion_form" action="/doggybook/trylog/" method="post">
+    <div class="modal fade" id="modal_connexion" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Connexion</h4>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <p><input type="email" name="mail" placeholder="E-mail" id="id_mail" required maxlength="100" /></p>
+                    <p><input type="password" name="password" placeholder="Mot de passe" id="id_password" required /></p>
+                    <input type="submit" value="Submit" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

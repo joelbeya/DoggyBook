@@ -1,0 +1,21 @@
+{% load static %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+            <span id="index_span"><a href="{% url 'DoggyBook:index' %}"><img src="{% static 'img/dog-paw.svg' %}" alt="Accueil" title="Accueil" width="40px"/></a></span>
+        </ul>
+        {% if user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+            <li><a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>{{user.name}}</a></li>
+            <li><a data-toggle="modal" href="/DoggyBook/logout"><span class="glyphicon glyphicon-log-in"></span>Deconnexion</a></li>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li><a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>Inscription</a></li>
+            <li><a data-toggle="modal" href="DoggyBook/login views.formu_submit #modal_connexion"><span class="glyphicon glyphicon-log-in"></span>Connexion</a></li>
+        </ul>
+        {% endif %}
+    </div>
+    {% include 'DoggyBook/login.html' %}
+    {% include 'DoggyBook/formu.html' %}
+</nav>

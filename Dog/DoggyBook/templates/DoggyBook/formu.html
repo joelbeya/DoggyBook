@@ -1,0 +1,29 @@
+<form class="inscription_form" action="/doggybook/subscribe/" method="post">
+    <div class="modal fade" id="modal_inscription" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Inscription</h4>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <p><input type="email" name="mail" placeholder="E-mail" id="id_mail" required maxlength="100" /></p>
+                    <p><input type="text" name="name" placeholder="Nom" id="id_name" required maxlength="100" /></p>
+                    <p><input type="text" name="first_name" placeholder="Prenom" id="id_first_name" required maxlength="100" /></p>
+                    <p><select name="sexe" data-placeholder="Sexe" id="id_sexe">
+                        <option value="Male">Homme</option>
+                        <option value="Femelle">Femme</option>
+                    </select></p>
+                    <p><input type="text" name="birth" placeholder="Année de naissance" readonly="readonly" id="id_birth" required /></p>
+                    <p><input type="password" name="password" placeholder="Mot de passe" id="id_password" required /></p>
+                    <input type="submit" value="Submit" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
