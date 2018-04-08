@@ -5,9 +5,9 @@
         <ul class="nav navbar-nav navbar-left">
             <span id="index_span"><a href="{% url 'DoggyBook:index' %}"><img src="{% static 'DoggyBook/img/dog-paw.svg' %}" alt="Accueil" title="Accueil" width="40px"/></a></span>
         </ul>
-        {% if user.is_authenticated %}
+        {% if request.user.is_authenticated %}
         <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" href="doggybook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>{{user.name}}</a></li>
+            <li><a data-toggle="modal" href="doggybook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>{{user.id}}</a></li>
             <li><a data-toggle="modal" href="/doggybook/logout"><span class="glyphicon glyphicon-log-in"></span>Deconnexion</a></li>
         </ul>
         {% else %}
