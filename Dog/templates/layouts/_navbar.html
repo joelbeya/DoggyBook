@@ -1,8 +1,9 @@
 {% load static %}
+{% block content %}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
-            <span id="index_span"><a href="{% url 'DoggyBook:index' %}"><img src="{% static 'img/dog-paw.svg' %}" alt="Accueil" title="Accueil" width="40px"/></a></span>
+            <span id="index_span"><a href="{% url 'DoggyBook:index' %}"><img src="{% static 'img/dogo2.svg' %}" alt="Accueil" title="Accueil" width="50px"/></a></span>
         </ul>
         {% if user.is_authenticated %}
         <ul class="nav navbar-nav navbar-right">
@@ -19,3 +20,4 @@
     {% include 'DoggyBook/login.html' %}
     {% include 'DoggyBook/formu.html' %}
 </nav>
+{% endblock content %}
