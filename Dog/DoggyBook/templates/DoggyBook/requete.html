@@ -1,16 +1,17 @@
 {% extends 'layouts/base.html' %}
 
-  {% block content %}
-    <h1> On a {{objets|length}} objets </h1>
+{% block content %}
 
-    <h7>
-      <pre>
-        {% for objet in objets %}
-          <h1> {{objet.id}}. {{objet.nom|upper}} {{objet.couleur_yeux|truncatewords:2}}</h1>
-        {% endfor %}
-      </pre>
-    </h7>
+<h1> On a {{objets|length}} objets </h1>
 
-   <a href="{% url 'home' %}">Bon zonga ndaku, Rwandais !</a>
+<h7>
+  <pre>
+    {% for objet in objets %}
+      <h1> {{objet.id}}. {{objet.nom|upper}} {{objet.couleur_yeux|truncatewords:2}}</h1>
+    {% endfor %}
+  </pre>
+</h7>
 
-  {% endblock content %}
+<a href="{% url 'home' %}">Bon zonga ndaku, Rwandais !</a>
+
+{% endblock content %}
