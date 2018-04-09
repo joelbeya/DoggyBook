@@ -12,6 +12,9 @@ def about(request):
 def contact(request):
     return render(request, 'pages/contact.html')
 
+def profilmembre(request):
+    return render(request, 'pages/profilmembre.html')
+
 def handler404(request):
     return render(request, 'errors/404.html', {}, status=404)
 

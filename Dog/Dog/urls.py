@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^about$', views.about, name='about'),
     url(r'^contact$', views.contact, name='contact'),
+    url(r'^profilmembre$', views.profilmembre, name='profilmembre'),
     url(r'^doggybook/', include('DoggyBook.urls')),
     path('admin/', admin.site.urls),
 ]
