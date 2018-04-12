@@ -8,6 +8,7 @@ from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import *
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -27,15 +28,25 @@ def show(request, obj, key):
     return render(request, 'DoggyBook/show.html', {'objet':objet})
 
 
+@login_required(login_url='/doggybook')
+def user(request, key):
+    objet = User.objects.get(id=int(key))
+    return render(request, 'DoggyBook/profilmembre.html', {'objet':objet})
+
+
 def subscribe(request):
     mail = request.POST['mail']
     password = request.POST['password']
     nom = request.POST['name']
     prenom = request.POST['first_name']
-    sexe = request.POST['sexe']
+    if (request.POST['sexe'] == "Homme"):
+        sexe = True
+    else:
+        sexe = False
     date_naissance = request.POST['birth']
 
-    User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+    u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+    Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
 
     return redirect('/doggybook/index')
 
