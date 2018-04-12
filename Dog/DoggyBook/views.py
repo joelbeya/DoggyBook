@@ -40,7 +40,7 @@ def show(request, obj, key):
 @login_required(login_url='/doggybook')
 def user(request, key):
     objet = User.objects.get(id=int(key))
-    return render(request, 'DoggyBook/profilmembre.html', {'objet':objet})
+    return render(request, 'DoggyBook/profil.html', {'objet':objet})
 
 
 def subscribe(request):
