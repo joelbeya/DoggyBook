@@ -8,6 +8,8 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^index', views.index,name='index'),
 	url(r'^subscribe', views.subscribe),
+	url(r'^gestionMembre$', views.gestionMembre, name='gestionMembre'),
+	url(r'^ajoutChien', views.ajoutChien),
 	url(r'^login', views.log),
 	url(r'^logout', views.log_out),
     url(r'^(?P<obj>[A-Za-z]*)$', views.requete),

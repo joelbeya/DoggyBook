@@ -14,6 +14,10 @@ def index(request):
     objets = Chien.objects.order_by('-created_at');
     return render(request, 'DoggyBook/index.html', {'objets':objets})
 
+def gestionMembre(request):
+    objets = Chien.objects.all()
+    return render(request, 'DoggyBook/gestionMembre.html', {'objets':objets})
+
 
 def requete(request,obj):
     identifier = getattr(sys.modules[__name__], obj)
@@ -39,6 +43,18 @@ def subscribe(request):
 
     return redirect('/doggybook/index')
 
+def ajoutChien(request):
+    nom= request.POST['nom']
+    date_naissance= request.POST['DateNais']
+    couleur_poils= request.POST['CouleursPo']
+    couleur_yeux= request.POST['CouleursYe']
+    sexe= request.POST['sexe']
+    proprio= request.POST['proprietaire']
+    race= request.POST['race']
+    pere= request.POST['pere']
+    mere= request.POST['mere']
+    Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race, pere=pere, mere=mere)
+    return redirect('/doggybook/gestionMembre')
 
 def log(request):
     username = request.POST['mail']
