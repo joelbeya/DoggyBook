@@ -12,6 +12,7 @@ urlpatterns = [
 	url(r'^ajoutChien', views.ajoutChien),
 	url(r'^login', views.log),
 	url(r'^logout', views.log_out),
+	url(r'^basic-upload/$', views.BasicUploadView.as_view(), name='basic_upload'),
 	url(r'^utilisateur/(?P<key>[0-9]*)$', views.user),
     url(r'^(?P<obj>[A-Za-z]*)$', views.requete),
     url(r'^(?P<obj>[A-Za-z]*)/(?P<key>[0-9]*)$', views.show),
