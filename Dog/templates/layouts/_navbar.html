@@ -2,28 +2,52 @@
 
 {% block content %}
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-left">
-            <span id="index_span"><a href="{% url 'DoggyBook:index' %}"><img src="{% static 'img/dogo3.svg' %}" alt="Accueil" title="Accueil" width="60px"/></a></span>
-        </ul>
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+        <a href="{% url 'DoggyBook:index' %}" class="w3-bar-item w3-button"><img src="{% static 'img/dogo3.svg' %}" alt="Accueil" title="Accueil" width="27px"/> <b>DoggyBook</b></a>
+        <!-- Right-sided navbar links -->
         {% if request.user.is_authenticated %}
-        <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" href="{% url 'profilmembre' %}"><span class="glyphicon glyphicon-user"></span>{{user.first_name}}</a></li>
-            <li><a data-toggle="modal" href="/doggybook/logout"><span class="glyphicon glyphicon-log-in"></span>Deconnexion</a></li>
-        </ul>
+        <!-- Right-sided navbar links -->
+        <div class="w3-right w3-hide-small">
+            <a data-toggle="modal" href="{% url 'profilmembre' %}" class="w3-bar-item w3-button" style="text-transform:uppercase"><i class="fa fa-user"></i> {{user.first_name.upper}}</a>
+            <a data-toggle="modal" href="/doggybook/logout" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> DÉCONNEXION</a>
+            <a href="{% url 'about' %}" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> À Propos</a>
+            <a href="{% url 'contact' %}" class="w3-bar-item w3-button"><i class="fa fa-envelope" style="text-transform:uppercase"></i> Contact</a>
+        </div>
         {% else %}
-        <ul class="nav navbar-nav navbar-right">
-            <li><a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription"><span class="glyphicon glyphicon-user"></span>Inscription</a></li>
-            <li><a data-toggle="modal" href="DoggyBook/login views.formu_submit #modal_connexion"><span class="glyphicon glyphicon-log-in"></span>Connexion</a></li>
-        </ul>
+        <div class="w3-right w3-hide-small">
+            <a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription" class="w3-bar-item w3-button" style="text-transform:uppercase"><i class="fa fa-user"></i> INSCRIPTION</a>
+            <a data-toggle="modal" href="DoggyBook/login views.formu_submit #modal_connexion" class="w3-bar-item w3-button" style="text-transform:uppercase"><i class="fa fa-usd"></i> CONNEXION</a>
+            <a href="{% url 'about' %}" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> À PROPOS</a>
+            <a href="{% url 'contact' %}" class="w3-bar-item w3-button"><i class="fa fa-envelope" style="text-transform:uppercase"></i> CONTACT</a>
+        </div>
         {% endif %}
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+        <a data-toggle="modal" href="javascript:void(0); {% url 'profilmembre' %}" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"><i class="fa fa-user" style="text-transform:uppercase"></i> {{user.first_name.upper}}</a>
+        <!-- Overlay effect when opening sidebar on small screens -->
+        <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
     </div>
+</div>
 
-    {% include 'DoggyBook/login.html' %}
-
-    {% include 'DoggyBook/formu.html' %}
-
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+    {% if request.user.is_authenticated %}
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">FERMER ×</a>
+    <a data-toggle="modal" href="{% url 'profilmembre' %}" onclick="w3_close()" class="w3-bar-item w3-button" style="text-transform:uppercase"> {{user.first_name.upper}}</a>
+    <a data-toggle="modal" href="/doggybook/logout" onclick="w3_close()" class="w3-bar-item w3-button" style="text-transform:uppercase"> DÉCONNEXION</a>
+    <a href="{% url 'about' %}" onclick="w3_close()" class="w3-bar-item w3-button" style="text-transform:uppercase"> À PROPOS</a>
+    <a href="{% url 'contact' %}" onclick="w3_close()" class="w3-bar-item w3-button" style="text-transform:uppercase"> CONTACT</a>
+    {% else %}
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">FERMER ×</a>
+    <a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription" onclick="w3_close()" class="w3-bar-item w3-button"> INSCRIPTION</a>
+    <a data-toggle="modal" href="DoggyBook/login views.formu_submit #modal_connexion" onclick="w3_close()" class="w3-bar-item w3-button"> CONNEXION</a>
+    <a href="{% url 'about' %}" onclick="w3_close()" class="w3-bar-item w3-button" style="text-transform:uppercase"> À PROPOS</a>
+    <a href="{% url 'contact' %}" onclick="w3_close()" class="w3-bar-item w3-button" style="text-transform:uppercase"> CONTACT</a>
+    {% endif %}
 </nav>
+
+{% include 'DoggyBook/login.html' %}
+
+{% include 'DoggyBook/formu.html' %}
 
 {% endblock content %}
