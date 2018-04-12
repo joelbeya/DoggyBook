@@ -9,7 +9,7 @@
         {% if request.user.is_authenticated %}
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
-            <a data-toggle="modal" href="{% url 'profilmembre' %}" class="w3-bar-item w3-button" style="text-transform:uppercase"><i class="fa fa-user"></i> {{user.first_name.upper}}</a>
+            <a data-toggle="modal" href="/doggybook/profil/{{user.id}}" class="w3-bar-item w3-button" style="text-transform:uppercase"><i class="fa fa-user"></i> {{user.first_name.upper}}</a>
             <a data-toggle="modal" href="/doggybook/logout" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> DÉCONNEXION</a>
             <a href="{% url 'about' %}" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> À PROPOS</a>
             <a href="{% url 'contact' %}" class="w3-bar-item w3-button"><i class="fa fa-envelope" style="text-transform:uppercase"></i> CONTACT</a>

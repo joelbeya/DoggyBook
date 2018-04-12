@@ -8,11 +8,16 @@ from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import *
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     objets = Chien.objects.order_by('-created_at');
     return render(request, 'DoggyBook/index.html', {'objets':objets})
+
+def gestionMembre(request):
+    objets = Chien.objects.all()
+    return render(request, 'DoggyBook/gestionMembre.html', {'objets':objets})
 
 
 def requete(request,obj):
@@ -27,18 +32,40 @@ def show(request, obj, key):
     return render(request, 'DoggyBook/show.html', {'objet':objet})
 
 
+@login_required(login_url='/doggybook')
+def user(request, key):
+    objet = User.objects.get(id=int(key))
+    return render(request, 'DoggyBook/profil.html', {'objet':objet})
+
+
 def subscribe(request):
     mail = request.POST['mail']
     password = request.POST['password']
     nom = request.POST['name']
     prenom = request.POST['first_name']
-    sexe = request.POST['sexe']
+    if (request.POST['sexe'] == "Homme"):
+        sexe = True
+    else:
+        sexe = False
     date_naissance = request.POST['birth']
 
-    User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+    u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+    Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
 
     return redirect('/doggybook/index')
 
+def ajoutChien(request):
+    nom= request.POST['nom']
+    date_naissance= request.POST['DateNais']
+    couleur_poils= request.POST['CouleursPo']
+    couleur_yeux= request.POST['CouleursYe']
+    sexe= request.POST['sexe']
+    proprio= request.POST['proprietaire']
+    race= request.POST['race']
+    pere= request.POST['pere']
+    mere= request.POST['mere']
+    Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race, pere=pere, mere=mere)
+    return redirect('/doggybook/gestionMembre')
 
 def log(request):
     username = request.POST['mail']

@@ -3,6 +3,9 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect
 
+def gestionMembre(request):
+    return render(request, 'DoggyBook/gestionMembre.html')
+
 def home(request):
     return render(request, 'pages/home.html')
 
