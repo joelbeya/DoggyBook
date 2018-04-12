@@ -1,0 +1,39 @@
+{% block content %}
+{% load static %}
+
+<button class="accordion">Section 1</button>
+<div class="panel">
+    {% csrf_token %}
+    <div class="form-style-3">
+        <form>
+            <fieldset><legend>Ajout de Chien</legend>
+                <label for="field1"><span>Nom du Chien <span class="required">*</span></span><input type="text" class="input-field" name="nom" value="" /></label>
+                <label for="field2"><span>Date de Naissance <span class="required">*</span></span><input type="date" class="input-field" name="DateNais" value="" /></label>
+                <label for="field3"><span>Couleurs Poils <span class="required">*</span></span><input type="text" class="input-field" name="CouleursPo" value="" /></label>
+                <label for="field1"><span>Couleur des yeux <span class="required">*</span></span><input type="text" class="input-field" name="CouleursYe" value="" /></label>
+                <label for="field3"><span>Proprietaire <span class="required">*</span></span><input type="text" class="input-field" name="proprietaire" value="" /></label>
+                <label for="field1"><span>Race<span class="required">*</span></span><input type="text" class="input-field" name="race" value="" /></label>
+                <label for="field2"><span>Père <span class="required">*</span></span><input type="email" class="input-field" name="pere" value="" /></label>
+                {% for objet in objets %}
+                <option value={{objet.id}}>{{objet.nom.get(sexe='M')}}</option>
+                <label for="field3"><span>Mère <span class="required">*</span></span><input type="text" class="input-field" name="mere" value="" /></label>
+                {% for objet in objets %}
+                <option value={{objet.id}}>{{objet.nom.get(sexe='F')}}</option>
+                <label for="field4"><span>Sexe</span><select name="sexe" class="select-field">
+                    <option value="F">F</option>
+                    <option value="M">M</option>
+                </select></label>
+        </form>
+    </div>
+</div>
+
+<button class="accordion">Section 2</button>
+<div class="panel">
+
+</div>
+
+<button class="accordion">Section 3</button>
+<div class="panel">
+
+</div>
+{% endblock content %}
