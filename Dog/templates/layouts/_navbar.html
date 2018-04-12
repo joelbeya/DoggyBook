@@ -2,6 +2,18 @@
 
 {% block content %}
 
+<<<<<<< HEAD
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+            <span id="index_span"><a href="{% url 'DoggyBook:index' %}"><img src="{% static 'img/dogo3.png' %}" alt="Accueil" title="Accueil" width="60px"/></a></span>
+        </ul>
+        {% if request.user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+            <li><a data-toggle="modal" href="/doggybook/utilisateur/{{user.id}}"><span class="glyphicon glyphicon-user"></span>{{user.first_name}}</a></li>
+            <li><a data-toggle="modal" href="/doggybook/logout"><span class="glyphicon glyphicon-log-in"></span>Deconnexion</a></li>
+        </ul>
+=======
 <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
         <a href="{% url 'DoggyBook:index' %}" class="w3-bar-item w3-button"><img src="{% static 'img/dogo3.svg' %}" alt="Accueil" title="Accueil" width="27px"/> <b>DoggyBook</b></a>
@@ -14,6 +26,7 @@
             <a href="{% url 'about' %}" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> À Propos</a>
             <a href="{% url 'contact' %}" class="w3-bar-item w3-button"><i class="fa fa-envelope" style="text-transform:uppercase"></i> Contact</a>
         </div>
+>>>>>>> 690f30b453923a31b81ccb5cfacb6cef1da73d12
         {% else %}
         <div class="w3-right w3-hide-small">
             <a data-toggle="modal" href="DoggyBook/formu views.formu #modal_inscription" class="w3-bar-item w3-button" style="text-transform:uppercase"><i class="fa fa-user"></i> INSCRIPTION</a>
