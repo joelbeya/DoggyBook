@@ -4,15 +4,15 @@
 
 <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
-        <a href="{% url 'DoggyBook:index' %}" class="w3-bar-item w3-button"><img src="{% static 'img/dogo3.svg' %}" alt="Accueil" title="Accueil" width="27px"/> <b>DoggyBook</b></a>
+        <a href="{% url 'DoggyBook:index' %}" class="w3-bar-item w3-button" style="text-decoration: none"><img src="{% static 'img/doggybook.svg' %}" alt="Accueil" title="Accueil" width="27px"/> <b>DoggyBook</b></a>
         <!-- Right-sided navbar links -->
         {% if request.user.is_authenticated %}
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
             <a data-toggle="modal" href="{% url 'profilmembre' %}" class="w3-bar-item w3-button" style="text-transform:uppercase"><i class="fa fa-user"></i> {{user.first_name.upper}}</a>
             <a data-toggle="modal" href="/doggybook/logout" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> DÉCONNEXION</a>
-            <a href="{% url 'about' %}" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> À Propos</a>
-            <a href="{% url 'contact' %}" class="w3-bar-item w3-button"><i class="fa fa-envelope" style="text-transform:uppercase"></i> Contact</a>
+            <a href="{% url 'about' %}" class="w3-bar-item w3-button"><i class="fa fa-usd" style="text-transform:uppercase"></i> À PROPOS</a>
+            <a href="{% url 'contact' %}" class="w3-bar-item w3-button"><i class="fa fa-envelope" style="text-transform:uppercase"></i> CONTACT</a>
         </div>
         {% else %}
         <div class="w3-right w3-hide-small">

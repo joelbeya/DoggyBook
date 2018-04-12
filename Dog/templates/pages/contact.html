@@ -7,8 +7,6 @@
 
     {% include 'layouts/_navbar.html' %}
 
-    {% include 'layouts/header.html' %}
-
     <div class="w3-container" style="padding:128px 16px" id="team">
         <h3 class="w3-center">THE TEAM</h3>
         <p class="w3-center w3-large">The ones who runs this company</p>
@@ -62,22 +60,23 @@
 
     {% include 'layouts/footer.html' %}
 
+    {% include 'layouts/script.html' %}
+
+    <script>
+    function mail() {
+        document.getElementById("1").innerHTML = "<i class=\"fa fa-envelope\"></i> teiki.raihauti@etu.umontpellier.fr";
+    }
+    function mail2() {
+        document.getElementById("2").innerHTML = "<i class=\"fa fa-envelope\"></i> ibrahima.tounkara@etu.umontpellier.fr";
+    }
+    function mail3() {
+        document.getElementById("3").innerHTML = "<i class=\"fa fa-envelope\"></i> joel.beya-ntumba@etu.umontpellier.fr";
+    }
+    function mail4() {
+        document.getElementById("4").innerHTML = "<i class=\"fa fa-envelope\"></i> imrhan-dareine.minko-amoa@etu.umontpellier.fr";
+    }
+    </script>
+    {% endblock content %}
+
 </body>
-
-{% include 'layouts/script.html' %}
-
-<script>
-function mail() {
-    document.getElementById("1").innerHTML = "<i class=\"fa fa-envelope\"></i> teiki.raihauti@etu.umontpellier.fr";
-}
-function mail2() {
-    document.getElementById("2").innerHTML = "<i class=\"fa fa-envelope\"></i> ibrahima.tounkara@etu.umontpellier.fr";
-}
-function mail3() {
-    document.getElementById("3").innerHTML = "<i class=\"fa fa-envelope\"></i> joel.beya-ntumba@etu.umontpellier.fr";
-}
-function mail4() {
-    document.getElementById("4").innerHTML = "<i class=\"fa fa-envelope\"></i> imrhan-dareine.minko-amoa@etu.umontpellier.fr";
-}
-</script>
-{% endblock content %}
+</html>
