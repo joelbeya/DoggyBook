@@ -49,6 +49,9 @@ class Proprietaire(SuperClass):
     photo_profil = models.ImageField(upload_to='photos/proprio/',blank=True)
     telephone = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.user.last_name
+
 
 
 class Chien(SuperClass):
