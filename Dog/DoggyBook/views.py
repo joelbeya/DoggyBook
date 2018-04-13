@@ -49,15 +49,16 @@ def subscribe(request):
     nom = request.POST['name']
     prenom = request.POST['first_name']
     if (request.POST['sexe'] == "Homme"):
-        sexe = True
+        sexe = 'H'
     else:
-        sexe = False
+        sexe = 'F'
     date_naissance = request.POST['birth']
 
     u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
     Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
 
     return redirect('/doggybook/index')
+
 
 def ajoutChien(request):
     nom= request.POST['nom']
@@ -88,7 +89,7 @@ def log_out(request):
     return redirect('/doggybook/index')
 
 
-class BasicUploadView(View):
+"""class BasicUploadView(View):
     def get(self, request):
         photos_list = Photo.objects.all()
         return render(self.request, 'photos/basic_upload/index.html', {'photos': photos_list})
@@ -100,5 +101,5 @@ class BasicUploadView(View):
             data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
         else:
             data = {'is_valid': False}
-        return JsonResponse(data)
+        return JsonResponse(data)"""
 
