@@ -16,4 +16,4 @@ MIDDLEWARE += [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dogomodel.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'doggybook.herokuapp.com']
