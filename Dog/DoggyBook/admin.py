@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Race)
 admin.site.register(Chien)
 admin.site.register(Proprietaire)
+admin.site.register(Photo)
