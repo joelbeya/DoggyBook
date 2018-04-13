@@ -10,8 +10,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import *
 from django.contrib.auth.decorators import login_required
-
-
 from .forms import PhotoForm
 from .models import Photo
 
@@ -101,4 +99,3 @@ class BasicUploadView(View):
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
-
