@@ -1,4 +1,5 @@
-__pycache__/
+Dog/DoggyBook/__pychache__/
+Dog/db.sqlite3
 *.py[cod]
 
 *.so

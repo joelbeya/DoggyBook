@@ -1,0 +1,63 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang=fr>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/GestionMembre.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/section.css' %}" />
+
+</head>
+<body>
+<button class="accordion">Ajouter un chien</button>
+<div class="panel">
+    <div class="form-style-3">
+    {% csrf_token %}
+        <form>
+                <fieldset><legend>Ajout de Chien</legend>
+                    <label for="field1"><span>Nom du Chien <span class="required">*</span></span><input type="text" class="input-field" name="nom" value="" /></label>
+                    <label for="field2"><span>Date de Naissance <span class="required">*</span></span><input type="date" class="input-field" name="DateNais" value="" /></label>
+                    <label for="field3"><span>Couleurs Poils <span class="required">*</span></span><input type="text" class="input-field" name="CouleursPo" value="" /></label>
+                    <label for="field1"><span>Couleur des yeux <span class="required">*</span></span><input type="text" class="input-field" name="CouleursYe" value="" /></label>
+                    <label for="field3"><span>Proprietaire<span class="required">*</span></span><input type="text" class="input-field" name="proprietaire" value="" /></label>
+                    <label for="field4"><span>Race</span><select name="race" class="select-field"></label>
+                    {% for objet in objets %}
+                        <option value={{objet.id}}>{{object.race}}</option>
+                    {% endfor %}
+                    </select>
+                    <label for="field4"><span>Père</span><select name="pere" class="select-field"></label>
+                    {% for objet in objets %}
+                        <option value={{objet.id}}>{{objet.nom}}</option>
+                    {% endfor %}
+                    </select>
+                    <label for="field4"><span>Mère</span><select name="mere" class="select-field"></label>
+                    {% for objet in objets %}
+                        <option value={{objet.id}}>{{objet.nom}}</option>
+                    {% endfor %}
+                </select>
+                    <label for="field4"><span>Sexe</span><select name="sexe" class="select-field">
+                        <option value="F">F</option>
+                        <option value="M">M</option>
+                    </select></label>
+
+            <div class="container">
+                <img src="{% static 'img/chichi.jpg' %}" alt="Snow">
+                <button class="btn">Button</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<button class="accordion">Supprimer un chien</button>
+<div class="panel">
+
+</div>
+
+<button class="accordion"></button>
+<div class="panel">
+
+</div>
+{% endblock content %}
+</body>
+<script src="{% static 'js/GestionMembre.js' %}"></script>
+</html>

@@ -1,0 +1,74 @@
+
+/* Container needed to position the button. Adjust the width as needed */
+.container {
+position: relative;
+top: 100%; left:10%;
+ width: 40%;
+}
+
+/* Make the image responsive */
+.container img {
+ width: 50%;
+ height: auto;
+}
+
+/* Style the button and place it in the middle of the container/image */
+.container .btn {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-150%, -150%);
+ -ms-transform: translate(-50%, -50%);
+ background-color: #555;
+ color: white;
+ font-size: 16px;
+ padding: 12px 24px;
+ border: none;
+ cursor: pointer;
+ border-radius: 5px;
+}
+
+.container .btn:hover {
+ background-color: black;
+}
+
+
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
