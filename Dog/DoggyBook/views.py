@@ -10,6 +10,16 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import *
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
+=======
+
+from django.views import View
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+
+
+
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
 from .forms import PhotoForm
 from .models import Photo
 
@@ -52,8 +62,16 @@ def subscribe(request):
         sexe = 'F'
     date_naissance = request.POST['birth']
 
+<<<<<<< HEAD
     u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
     Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
+=======
+    if User.objects.get(email=mail) is None:
+        u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+        Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
+    else:
+        return redirect('/doggybook/Chien')
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
 
     return redirect('/doggybook/index')
 
@@ -63,6 +81,14 @@ def ajoutChien(request):
     date_naissance= request.POST['DateNais']
     couleur_poils= request.POST['CouleursPo']
     couleur_yeux= request.POST['CouleursYe']
+<<<<<<< HEAD
+=======
+    if (resquest.POST['sexe']=="Mâle"):
+        sexe = 'H'
+    else:
+        sexe= 'F'
+
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
     sexe= request.POST['sexe']
     proprio= request.POST['proprietaire']
     race= request.POST['race']
@@ -82,11 +108,27 @@ def log(request):
         return HttpResponse("Your username and password didn't match.")
 
 
+@login_required(login_url='/doggybook')
 def log_out(request):
     logout(request)
     return redirect('/doggybook/index')
 
 
+<<<<<<< HEAD
+=======
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'core/simple_upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'core/simple_upload.html')
+
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
 """class BasicUploadView(View):
     def get(self, request):
         photos_list = Photo.objects.all()

@@ -25,11 +25,14 @@ class SuperClass(models.Model):
         abstract = True
 
 
+<<<<<<< HEAD
 class Photo(models.Model):
     title = models.CharField(max_length=255, blank=True)
     file = models.FileField(upload_to='photos/chien/')
     upload_at = models.DateTimeField(auto_now_add=True)
     like = models.IntegerField(default=0)
+=======
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
 
 
 class Race(SuperClass):
@@ -61,7 +64,10 @@ class Chien(SuperClass):
     couleur_yeux = models.CharField(max_length=255)
     sexe = models.CharField(max_length=1)
     photo_profil = models.ImageField(upload_to='photos/profilchien/',blank=True)
+<<<<<<< HEAD
     photos = models.ForeignKey(Photo,on_delete=models.CASCADE,related_name='photos',blank=True,null=True)
+=======
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
     proprio = models.ForeignKey(Proprietaire,on_delete=models.CASCADE,related_name='chiens')
     race = models.ForeignKey(Race,on_delete=models.CASCADE,related_name='chiens')
     pere = models.ForeignKey('self', on_delete=models.CASCADE,null=True,blank=True,related_name='enfant_pere')
@@ -69,4 +75,13 @@ class Chien(SuperClass):
     avis = models.TextField(blank=True)
 
 
+<<<<<<< HEAD
+=======
+class Photo(models.Model):
+    title = models.CharField(max_length=255, blank=True)
+    file = models.FileField(upload_to='photos/chien/')
+    upload_at = models.DateTimeField(auto_now_add=True)
+    like = models.IntegerField(default=0)
+    chien = models.ForeignKey(Chien,on_delete=models.CASCADE,related_name='photos',blank=True,null=True)
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
 

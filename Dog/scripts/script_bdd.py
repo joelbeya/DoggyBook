@@ -51,7 +51,10 @@ def run():
 
 	u = User.objects.create_user(username="Graham@test.com",email="Graham@test.com",first_name="Kaseem",last_name="Graham",password="test")
 	Proprietaire.objects.create(user=u,date_naissance="1963-06-11",adresse="922-5445 At Rd.",sexe="F",telephone="0687245899")
+<<<<<<< HEAD
 
+=======
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
 	
 	
 
@@ -68,6 +71,7 @@ def run():
 	Race.objects.create(nom="Berger",taille=120,morphologie="musclé",comportement="agressif")"""
 
 	#Ajout des Chiens
+<<<<<<< HEAD
 	"""Chien.objects.create(nom="Medor",date_naissance="2006-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe=True,proprio=Proprietaire(1),race=Race(1))
 	Chien.objects.create(nom="Toto",date_naissance="2002-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe=False,proprio=Proprietaire(1),race=Race(2))
 	Chien.objects.create(nom="Pet",date_naissance="2008-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe=False,proprio=Proprietaire(2),race=Race(4),pere=Chien(1),mere=Chien(2))
@@ -86,3 +90,20 @@ def run():
 	Chien.objects.create(nom="Medor",date_naissance="2006-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe=True,proprio=Proprietaire(15),race=Race(1))
 	Chien.objects.create(nom="Toto",date_naissance="2002-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe=False,proprio=Proprietaire(17),race=Race(3))
 	Chien.objects.create(nom="Pet",date_naissance="2008-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe=False,proprio=Proprietaire(18),race=Race(4),pere=Chien(10),mere=Chien(8))"""
+=======
+	Chien.objects.create(nom="Medor",date_naissance="2006-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="M",proprio=Proprietaire(1),race=Race(1))
+	Chien.objects.create(nom="Toto",date_naissance="2002-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(1),race=Race(2))
+	Chien.objects.create(nom="Pet",date_naissance="2008-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(2),race=Race(4),pere=Chien(1),mere=Chien(2))
+	Chien.objects.create(nom="Medor",date_naissance="2006-10-25",couleur_poils="rouge",couleur_yeux="rouge",sexe="M",proprio=Proprietaire(3),race=Race(8))
+	Chien.objects.create(nom="Toto",date_naissance="2002-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(9),race=Race(9))
+	Chien.objects.create(nom="Pet",date_naissance="2008-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(3),race=Race(10),pere=Chien(4),mere=Chien(5))
+	Chien.objects.create(nom="Medor",date_naissance="2006-10-25",couleur_poils="bleu",couleur_yeux="bleu",sexe="M",proprio=Proprietaire(12),race=Race(7))
+	Chien.objects.create(nom="Toto",date_naissance="2002-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(14),race=Race(1))
+	Chien.objects.create(nom="Pet",date_naissance="2008-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(5),race=Race(2),pere=Chien(1),mere=Chien(2))
+	Chien.objects.create(nom="Medor",date_naissance="2006-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="M",proprio=Proprietaire(6),race=Race(5))
+	Chien.objects.create(nom="Toto",date_naissance="2002-10-25",couleur_poils="marron",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(7),race=Race(6))
+	Chien.objects.create(nom="Pet",date_naissance="2008-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(8),race=Race(7),pere=Chien(1),mere=Chien(2))
+	Chien.objects.create(nom="Medor",date_naissance="2006-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="M",proprio=Proprietaire(10),race=Race(7))
+	Chien.objects.create(nom="Toto",date_naissance="2002-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(11),race=Race(7))
+	Chien.objects.create(nom="Pet",date_naissance="2008-10-25",couleur_poils="rouge",couleur_yeux="bleu",sexe="F",proprio=Proprietaire(12),race=Race(9),pere=Chien(10),mere=Chien(8))
+>>>>>>> 939c91fee5fa0a07630f95927e872540c15b7dcf
