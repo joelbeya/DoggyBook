@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from .models import *
 import sys
 from django.contrib.auth import logout, get_user
@@ -10,15 +10,47 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import *
 from django.contrib.auth.decorators import login_required
-
 from django.views import View
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
-
-
-
-from .forms import PhotoForm
+from .forms import ImageUploadForm
 from .models import Photo
+
+
+def upload_pic_chien(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = Photo()
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload success')
+    return HttpResponseForbidden('allowed only via POST')
+
+
+
+def upload_pic_user(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = Photo()
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload success')
+    return HttpResponseForbidden('allowed only via POST')
+
+
+
+def upload_pic(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = Photo()
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload success')
+    return HttpResponseForbidden('allowed only via POST')
+
 
 
 def index(request):
@@ -101,30 +133,3 @@ def log(request):
 def log_out(request):
     logout(request)
     return redirect('/doggybook/index')
-
-
-
-def simple_upload(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'core/simple_upload.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'core/simple_upload.html')
-
-"""class BasicUploadView(View):
-    def get(self, request):
-        photos_list = Photo.objects.all()
-        return render(self.request, 'photos/basic_upload/index.html', {'photos': photos_list})
-
-    def post(self, request):
-        form = PhotoForm(self.request.POST, self.request.FILES)
-        if form.is_valid():
-            photo = form.save()
-            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
-        else:
-            data = {'is_valid': False}
-        return JsonResponse(data)"""
