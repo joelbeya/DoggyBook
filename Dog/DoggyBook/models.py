@@ -64,8 +64,4 @@ class Chien(SuperClass):
 
 
 class Photo(models.Model):
-    title = models.CharField(max_length=255, blank=True)
-    file = models.FileField(upload_to='photos/chien/')
-    upload_at = models.DateTimeField(auto_now_add=True)
-    like = models.IntegerField(default=0)
-    chien = models.ForeignKey(Chien,on_delete=models.CASCADE,related_name='photos',blank=True,null=True)
+    model_pic = models.ImageField(upload_to = 'photos/user/', default = 'DoggyBook/Dog/media/photos/chien/dogo5.jpeg')

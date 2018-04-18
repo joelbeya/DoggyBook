@@ -1,7 +1,7 @@
-from .models import Photo
+
+#-*- coding: utf-8 -*-
 from django import forms
 
-class PhotoForm(forms.ModelForm):
-    class Meta:
-        model = Photo
-        fields = ('file', )
+class ImageUploadForm(forms.Form):
+    """Image upload form."""
+    image = forms.ImageField()

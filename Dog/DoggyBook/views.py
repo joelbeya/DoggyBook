@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from .models import *
 import sys
 from django.contrib.auth import logout, get_user
@@ -15,11 +15,53 @@ from django.views import View
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
-
-
-from .forms import PhotoForm
+from .forms import ImageUploadForm
 from .models import Photo
 
+# Imaginary function to handle an uploaded file.
+# from somewhere import handle_uploaded_file
+
+"""def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'DoggyBook/photo.html', {'form': form})"""
+
+
+# def upload_file (request):
+#     if request.method == "POST":
+#         form = PhotoForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             photo = Photo()
+#             photo = Photo(file=request.FILES['file'])
+#             photo.title = Photo(title=request.POST['nom'])
+#             photo.save()
+#             return HttpResponseRedirect('Save Done')
+#     else:
+#         form = PhotoForm()
+#     return render(request, 'DoggyBook/photo.html',{'form': form})
+#
+#
+
+
+def upload_pic(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = Photo()
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload success')
+    return HttpResponseForbidden('allowed only via POST')
 
 def index(request):
     objets = Chien.objects.order_by('-created_at');
@@ -104,7 +146,7 @@ def log_out(request):
 
 
 
-def simple_upload(request):
+"""def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
@@ -113,7 +155,7 @@ def simple_upload(request):
         return render(request, 'core/simple_upload.html', {
             'uploaded_file_url': uploaded_file_url
         })
-    return render(request, 'core/simple_upload.html')
+    return render(request, 'core/simple_upload.html') """
 
 """class BasicUploadView(View):
     def get(self, request):
