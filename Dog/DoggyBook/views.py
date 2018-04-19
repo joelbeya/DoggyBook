@@ -13,17 +13,17 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
-from .forms import ImageUploadForm
-from .models import Photo
+from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
+from .models import *
 
 
 def upload_pic_chien(request):
     if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
+        form = ImageUploadForm_chien(request.POST, request.FILES)
         if form.is_valid():
-            m = Photo()
-            m.model_pic = form.cleaned_data['image']
-            m.save()
+            c = Chien()
+            c.photo_profil = form.cleaned_data['image']
+            c.save()
             return HttpResponse('image upload success')
     return HttpResponseForbidden('allowed only via POST')
 
@@ -31,12 +31,12 @@ def upload_pic_chien(request):
 
 def upload_pic_user(request):
     if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
+        form = ImageUploadForm_user(request.POST, request.FILES)
         if form.is_valid():
-            m = Photo()
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-            return HttpResponse('image upload success')
+            u = Proprietaire()
+            u.photo_profil = form.cleaned_data['image']
+            u.save()
+            return HttpResponse('image upload success in Proprietaire')
     return HttpResponseForbidden('allowed only via POST')
 
 
@@ -48,7 +48,7 @@ def upload_pic(request):
             m = Photo()
             m.model_pic = form.cleaned_data['image']
             m.save()
-            return HttpResponse('image upload success')
+            return HttpResponse('image upload succesS')
     return HttpResponseForbidden('allowed only via POST')
 
 
@@ -68,10 +68,10 @@ def requete(request,obj):
     return render(request, 'DoggyBook/requete.html', {'objets':objets})
 
 
-def show(request, obj, key):
-    identifier = getattr(sys.modules[__name__], obj)
-    objet = identifier.find(int(key))
-    return render(request, 'DoggyBook/show.html', {'objet':objet})
+# def show(request, obj, key):
+#     identifier = getattr(sys.modules[__name__], obj)
+#     objet = identifier.find(int(key))
+#     return render(request, 'DoggyBook/show.html', {'objet':objet})
 
 
 @login_required(login_url='/doggybook')
