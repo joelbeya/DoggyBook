@@ -41,7 +41,7 @@ class Proprietaire(SuperClass):
     date_naissance = models.DateField()
     adresse = models.CharField(max_length=255)
     sexe = models.CharField(max_length=1)
-    photo_profil = models.ImageField(upload_to='photos/proprio/',blank=True)
+    photo_profil = models.ImageField(upload_to='photos/proprio/user_id',blank=True)
     telephone = models.CharField(max_length=10)
 
     def __str__(self):
