@@ -37,7 +37,7 @@ class Race(SuperClass):
 
 
 class Proprietaire(SuperClass):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='proprio')
     date_naissance = models.DateField()
     adresse = models.CharField(max_length=255)
     sexe = models.CharField(max_length=1)

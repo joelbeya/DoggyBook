@@ -33,10 +33,10 @@ def upload_pic_user(request):
     if request.method == 'POST':
         form = ImageUploadForm_user(request.POST, request.FILES)
         if form.is_valid():
-            u = Proprietaire()
+            u = request.user.proprio
             u.photo_profil = form.cleaned_data['image']
             u.save()
-            return HttpResponse('image upload success in Proprietaire')
+            return HttpResponse('OK')
     return HttpResponseForbidden('allowed only via POST')
 
 
