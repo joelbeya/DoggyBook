@@ -237,3 +237,14 @@ footer p {
     float: left;
     display: block;
 }
+
+.w3-dropdown-click{
+    float: right !important;
+    right: 0;
+    left: auto;
+}
+
+.w3-dropdown-content{
+    right: 0;
+    left: auto;
+}

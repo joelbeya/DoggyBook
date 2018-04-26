@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from .models import *
 import sys
 from django.contrib.auth import logout, get_user
@@ -10,8 +10,47 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import *
 from django.contrib.auth.decorators import login_required
-from .forms import PhotoForm
-from .models import Photo
+from django.views import View
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
+from .models import *
+
+
+def upload_pic_chien(request):
+    if request.method == 'POST':
+        form = ImageUploadForm_chien(request.POST, request.FILES)
+        if form.is_valid():
+            c = Chien()
+            c.photo_profil = form.cleaned_data['image']
+            c.save()
+            return HttpResponse('image upload success')
+    return HttpResponseForbidden('allowed only via POST')
+
+
+
+def upload_pic_user(request):
+    if request.method == 'POST':
+        form = ImageUploadForm_user(request.POST, request.FILES)
+        if form.is_valid():
+            u = request.user.proprio
+            u.photo_profil = form.cleaned_data['image']
+            u.save()
+            return HttpResponse('OK')
+    return HttpResponseForbidden('allowed only via POST')
+
+
+
+def upload_pic(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = Photo()
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload succesS')
+    return HttpResponseForbidden('allowed only via POST')
+
 
 
 def index(request):
@@ -29,10 +68,10 @@ def requete(request,obj):
     return render(request, 'DoggyBook/requete.html', {'objets':objets})
 
 
-def show(request, obj, key):
-    identifier = getattr(sys.modules[__name__], obj)
-    objet = identifier.find(int(key))
-    return render(request, 'DoggyBook/show.html', {'objet':objet})
+# def show(request, obj, key):
+#     identifier = getattr(sys.modules[__name__], obj)
+#     objet = identifier.find(int(key))
+#     return render(request, 'DoggyBook/show.html', {'objet':objet})
 
 
 @login_required(login_url='/doggybook')
@@ -52,8 +91,11 @@ def subscribe(request):
         sexe = 'F'
     date_naissance = request.POST['birth']
 
-    u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
-    Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
+    if User.objects.get(email=mail) is None:
+        u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+        Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
+    else:
+        return redirect('/doggybook/Chien')
 
     return redirect('/doggybook/index')
 
@@ -63,6 +105,11 @@ def ajoutChien(request):
     date_naissance= request.POST['DateNais']
     couleur_poils= request.POST['CouleursPo']
     couleur_yeux= request.POST['CouleursYe']
+    if (request.POST['sexe']=="Mâle"):
+        sexe = 'M'
+    else:
+        sexe= 'F'
+
     sexe= request.POST['sexe']
     proprio= request.POST['proprietaire']
     race= request.POST['race']
@@ -82,21 +129,7 @@ def log(request):
         return HttpResponse("Your username and password didn't match.")
 
 
+@login_required(login_url='/doggybook')
 def log_out(request):
     logout(request)
     return redirect('/doggybook/index')
-
-
-"""class BasicUploadView(View):
-    def get(self, request):
-        photos_list = Photo.objects.all()
-        return render(self.request, 'photos/basic_upload/index.html', {'photos': photos_list})
-
-    def post(self, request):
-        form = PhotoForm(self.request.POST, self.request.FILES)
-        if form.is_valid():
-            photo = form.save()
-            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
-        else:
-            data = {'is_valid': False}
-        return JsonResponse(data)"""

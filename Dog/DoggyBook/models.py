@@ -25,11 +25,6 @@ class SuperClass(models.Model):
         abstract = True
 
 
-class Photo(models.Model):
-    title = models.CharField(max_length=255, blank=True)
-    file = models.FileField(upload_to='photos/chien/')
-    upload_at = models.DateTimeField(auto_now_add=True)
-    like = models.IntegerField(default=0)
 
 
 class Race(SuperClass):
@@ -42,11 +37,11 @@ class Race(SuperClass):
 
 
 class Proprietaire(SuperClass):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='proprio')
     date_naissance = models.DateField()
     adresse = models.CharField(max_length=255)
     sexe = models.CharField(max_length=1)
-    photo_profil = models.ImageField(upload_to='photos/proprio/',blank=True)
+    photo_profil = models.ImageField(upload_to='photos/proprio',blank=True)
     telephone = models.CharField(max_length=10)
 
     def __str__(self):
@@ -61,7 +56,6 @@ class Chien(SuperClass):
     couleur_yeux = models.CharField(max_length=255)
     sexe = models.CharField(max_length=1)
     photo_profil = models.ImageField(upload_to='photos/profilchien/',blank=True)
-    photos = models.ForeignKey(Photo,on_delete=models.CASCADE,related_name='photos',blank=True,null=True)
     proprio = models.ForeignKey(Proprietaire,on_delete=models.CASCADE,related_name='chiens')
     race = models.ForeignKey(Race,on_delete=models.CASCADE,related_name='chiens')
     pere = models.ForeignKey('self', on_delete=models.CASCADE,null=True,blank=True,related_name='enfant_pere')
@@ -69,4 +63,5 @@ class Chien(SuperClass):
     avis = models.TextField(blank=True)
 
 
-
+class Photo(models.Model):
+    model_pic = models.ImageField(upload_to = 'photos/user/', default = 'DoggyBook/Dog/media/photos/chien/dogo5.jpeg')

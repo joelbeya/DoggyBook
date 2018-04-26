@@ -1,12 +1,15 @@
+
+{% load static %}
 {% include 'layouts/head.html' %}
 <body>
 
     {% include 'layouts/_navbar.html' %}
     {% include 'layouts/header.html' %}
-    
+
     {% include 'layouts/footer.html' %}
 
+    {% include 'layouts/script.html' %}
+    <script src="{% static 'js/carousel.js' %}"></script>
 </body>
-{% include 'layouts/script.html' %}
 
 </html>
