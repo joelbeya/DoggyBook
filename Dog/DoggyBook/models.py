@@ -65,4 +65,4 @@ class Chien(SuperClass):
 
 class Photo(models.Model):
     model_pic = models.ImageField(upload_to = 'photos/user/', default = 'DoggyBook/Dog/media/photos/chien/dogo5.jpeg')
-    chien = models.ForeignKey(Chien,on_delete=models.CASCADE,related_name='photos')
+    chien = models.ForeignKey(Chien,on_delete=models.CASCADE,related_name='photos',blank=True,null=True)

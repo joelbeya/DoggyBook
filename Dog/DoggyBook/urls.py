@@ -18,12 +18,9 @@ urlpatterns = [
 	url(r'^ajoutChien', views.ajoutChien),
 	url(r'^login', views.log),
 	url(r'^logout', views.log_out),
-<<<<<<< HEAD
 	url(r'^album/(?P<key>[0-9]*)$', views.photoChien),
-=======
 	url(r'^race/(?P<key>[0-9]*)$', views.race),
 	#url(r'^basic-upload/$', views.BasicUploadView.as_view(), name='basic_upload'),
->>>>>>> 064f7442a70c91076a62334233c70f7e2d347baa
 	url(r'^profil/(?P<key>[0-9]*)$', views.user),
    	url(r'^(?P<obj>[A-Za-z]*)$', views.requete),
 ]
