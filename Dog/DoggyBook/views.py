@@ -105,8 +105,8 @@ def ajoutChien(request):
     date_naissance= request.POST['DateNais']
     couleur_poils= request.POST['CouleursPo']
     couleur_yeux= request.POST['CouleursYe']
-    if (resquest.POST['sexe']=="Mâle"):
-        sexe = 'H'
+    if (request.POST['sexe']=="Mâle"):
+        sexe = 'M'
     else:
         sexe= 'F'
 
