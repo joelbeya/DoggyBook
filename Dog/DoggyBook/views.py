@@ -41,6 +41,14 @@ def upload_pic_user(request):
 
 
 
+def photoChien(request, key):
+    objets = Chien.objects.photos(id=int(key))
+    return render(request,'DoggyBook/lightbox.html', {'objets':objets})
+    
+
+
+
+
 def upload_pic(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
