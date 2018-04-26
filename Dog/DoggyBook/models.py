@@ -41,7 +41,7 @@ class Proprietaire(SuperClass):
     date_naissance = models.DateField()
     adresse = models.CharField(max_length=255)
     sexe = models.CharField(max_length=1)
-    photo_profil = models.ImageField(upload_to='photos/proprio',blank=True)
+    photo_profil = models.ImageField(upload_to='photos/proprio',blank=True,default='user_default_profil_pic.jpg')
     telephone = models.CharField(max_length=10)
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Chien(SuperClass):
     couleur_poils = models.CharField(max_length=255)
     couleur_yeux = models.CharField(max_length=255)
     sexe = models.CharField(max_length=1)
-    photo_profil = models.ImageField(upload_to='photos/profilchien/',blank=True)
+    photo_profil = models.ImageField(upload_to='photos/profilchien/',blank=True,default='dog_default_profil_pic.png')
     proprio = models.ForeignKey(Proprietaire,on_delete=models.CASCADE,related_name='chiens')
     race = models.ForeignKey(Race,on_delete=models.CASCADE,related_name='chiens')
     pere = models.ForeignKey('self', on_delete=models.CASCADE,null=True,blank=True,related_name='enfant_pere')
@@ -65,3 +65,4 @@ class Chien(SuperClass):
 
 class Photo(models.Model):
     model_pic = models.ImageField(upload_to = 'photos/user/', default = 'DoggyBook/Dog/media/photos/chien/dogo5.jpeg')
+    chien = models.ForeignKey(Chien,on_delete=models.CASCADE,related_name='photos')

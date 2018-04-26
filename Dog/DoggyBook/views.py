@@ -36,7 +36,8 @@ def upload_pic_user(request):
             u = request.user.proprio
             u.photo_profil = form.cleaned_data['image']
             u.save()
-            return HttpResponse('OK')
+            a = 'profil/' + str(request.user.id)
+            return redirect(a)
     return HttpResponseForbidden('allowed only via POST')
 
 
@@ -86,6 +87,10 @@ def requete(request,obj):
 def user(request, key):
     objet = User.objects.get(id=int(key))
     return render(request, 'DoggyBook/profil.html', {'objet':objet})
+
+def race(request,key):
+    objet = Race.objects.get(id=int(key))
+    return render(request, 'DoggyBook/race.html', {'objet':objet})
 
 
 def subscribe(request):
@@ -141,3 +146,4 @@ def log(request):
 def log_out(request):
     logout(request)
     return redirect('/doggybook/index')
+
