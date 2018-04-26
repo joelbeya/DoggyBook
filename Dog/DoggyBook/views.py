@@ -92,6 +92,10 @@ def race(request,key):
     objet = Race.objects.get(id=int(key))
     return render(request, 'DoggyBook/race.html', {'objet':objet})
 
+def chien(request,key):
+    objet = Chien.objects.get(id=int(key))
+    return render(request, 'DoggyBook/chien.html', {'objet':objet})
+
 
 def subscribe(request):
     mail = request.POST['mail']
@@ -146,4 +150,3 @@ def log(request):
 def log_out(request):
     logout(request)
     return redirect('/doggybook/index')
-
