@@ -1,48 +1,37 @@
 {% block content %}
 {% load static %}
-<!DOCTYPE html>
-<html lang=fr>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox.css' %}" />
-
-</head>
-<body>
-
+<!--
 <div class="row">
-{% set counter = 1 %}
-{% for objet in objets %}
-  <div class="column">
-    <img src="{{objet.photo.model_pic}}" style="width:100%" onclick="openModal();currentSlide(counter++)" class="hover-shadow cursor">
-  </div>
-</div>
- {% endfor %}
-<div id="myModal" class="modal">
-  <span class="close cursor" onclick="closeModal()">&times;</span>
-  <div class="modal-content">
-{% for objet in objets %}
-    <div class="mySlides">
-      <div class="numbertext">1 / 4</div>
-      <img src="{{objet.photo.model_pic}}" style="width:100%">
-    </div>
-{% endfor %}
-    
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
-{% set counter = 1 %}
-{% for objet in objets %}
+    {% set counter = 1 %}
+    {% for objet in objets %}
     <div class="column">
-      <img class="demo cursor" src="{{objet.photo.model_pic}}" style="width:100%" onclick="currentSlide(counter++)" alt="Nature and sunrise">
+        <img src="{{objet.photo.model_pic}}" style="width:100%" onclick="openModal();currentSlide(counter++)" class="hover-shadow cursor">
     </div>
- {% endfor %}   
-  </div>
+</div>
+{% endfor %}
+<div id="myModal" class="modal">
+    <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        {% for objet in objets %}
+        <div class="mySlides">
+            <div class="numbertext">1 / 4</div>
+            <img src="{{objet.photo.model_pic}}" style="width:100%">
+        </div>
+        {% endfor %}
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div class="caption-container">
+            <p id="caption"></p>
+        </div>
+        {% set counter = 1 %}
+        {% for objet in objets %}
+        <div class="column">
+            <img class="demo cursor" src="{{objet.photo.model_pic}}" style="width:100%" onclick="currentSlide(counter++)" alt="Nature and sunrise">
+        </div>
+         {% endfor %}
+   </div>
 </div>
 
 {% endblock content %}
-</body>
-<script src="{% static 'js/lightbox.js' %}"></script>
-</html>
+-->
