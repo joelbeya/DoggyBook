@@ -86,7 +86,8 @@ def requete(request,obj):
 @login_required(login_url='/doggybook')
 def user(request, key):
     objet = User.objects.get(id=int(key))
-    return render(request, 'DoggyBook/profil.html', {'objet':objet})
+    chiens = objet.proprio.chiens.all()
+    return render(request, 'DoggyBook/profil.html', {'objet':objet,'chiens':chiens})
 
 def race(request,key):
     objet = Race.objects.get(id=int(key))
