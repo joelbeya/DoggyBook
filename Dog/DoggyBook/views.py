@@ -16,6 +16,14 @@ from django.conf import settings
 from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
 from .models import *
 
+# Pour l'image dans le rapport 
+
+def index(request):
+    objets = Chien.objects.order_by('-created_at');
+    return render(request, 'DoggyBook/index.html', {'objets':objets})
+# Pour l'image dans le rapport
+
+
 
 def upload_pic_chien(request):
     if request.method == 'POST':
@@ -45,7 +53,7 @@ def upload_pic_user(request):
 def photoChien(request, key):
     objets = Chien.objects.photos(id=int(key))
     return render(request,'DoggyBook/lightbox.html', {'objets':objets})
-    
+
 
 
 
@@ -62,9 +70,6 @@ def upload_pic(request):
 
 
 
-def index(request):
-    objets = Chien.objects.order_by('-created_at');
-    return render(request, 'DoggyBook/index.html', {'objets':objets})
 
 def gestionMembre(request):
     objets = Chien.objects.all()
