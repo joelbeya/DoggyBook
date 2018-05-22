@@ -16,7 +16,7 @@ from django.conf import settings
 from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
 from .models import *
 
-# Pour l'image dans le rapport 
+# Pour l'image dans le rapport
 
 def index(request):
     objets = Chien.objects.order_by('-created_at');
@@ -114,13 +114,20 @@ def subscribe(request):
         sexe = 'F'
     date_naissance = request.POST['birth']
 
-    if User.objects.get(email=mail) is None:
-        u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
-        Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
-    else:
+    try:
+        u = User.objects.get(email=mail)
         return redirect('/doggybook/Chien')
-
+    except User.DoesNotExist:
+        u = None
+        User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
     return redirect('/doggybook/index')
+    #
+    # if User.objects.get(email=mail) is not None:
+    #     u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+    #     Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
+    # else:
+    #     User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+
 
 
 def ajoutChien(request):
