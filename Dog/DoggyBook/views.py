@@ -13,17 +13,25 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
-from .forms import ImageUploadForm
-from .models import Photo
+from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
+from .models import *
+
+# Pour l'image dans le rapport 
+
+def index(request):
+    objets = Chien.objects.order_by('-created_at');
+    return render(request, 'DoggyBook/index.html', {'objets':objets})
+# Pour l'image dans le rapport
+
 
 
 def upload_pic_chien(request):
     if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
+        form = ImageUploadForm_chien(request.POST, request.FILES)
         if form.is_valid():
-            m = Photo()
-            m.model_pic = form.cleaned_data['image']
-            m.save()
+            c = Chien()
+            c.photo_profil = form.cleaned_data['image']
+            c.save()
             return HttpResponse('image upload success')
     return HttpResponseForbidden('allowed only via POST')
 
@@ -31,13 +39,22 @@ def upload_pic_chien(request):
 
 def upload_pic_user(request):
     if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
+        form = ImageUploadForm_user(request.POST, request.FILES)
         if form.is_valid():
-            m = Photo()
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-            return HttpResponse('image upload success')
+            u = request.user.proprio
+            u.photo_profil = form.cleaned_data['image']
+            u.save()
+            a = 'profil/' + str(request.user.id)
+            return redirect(a)
     return HttpResponseForbidden('allowed only via POST')
+
+
+
+def photoChien(request, key):
+    objets = Chien.objects.photos(id=int(key))
+    return render(request,'DoggyBook/lightbox.html', {'objets':objets})
+
+
 
 
 
@@ -48,14 +65,11 @@ def upload_pic(request):
             m = Photo()
             m.model_pic = form.cleaned_data['image']
             m.save()
-            return HttpResponse('image upload success')
+            return HttpResponse('image upload succesS')
     return HttpResponseForbidden('allowed only via POST')
 
 
 
-def index(request):
-    objets = Chien.objects.order_by('-created_at');
-    return render(request, 'DoggyBook/index.html', {'objets':objets})
 
 def gestionMembre(request):
     objets = Chien.objects.all()
@@ -68,16 +82,25 @@ def requete(request,obj):
     return render(request, 'DoggyBook/requete.html', {'objets':objets})
 
 
-def show(request, obj, key):
-    identifier = getattr(sys.modules[__name__], obj)
-    objet = identifier.find(int(key))
-    return render(request, 'DoggyBook/show.html', {'objet':objet})
+# def show(request, obj, key):
+#     identifier = getattr(sys.modules[__name__], obj)
+#     objet = identifier.find(int(key))
+#     return render(request, 'DoggyBook/show.html', {'objet':objet})
 
 
 @login_required(login_url='/doggybook')
 def user(request, key):
     objet = User.objects.get(id=int(key))
-    return render(request, 'DoggyBook/profil.html', {'objet':objet})
+    chiens = objet.proprio.chiens.all()
+    return render(request, 'DoggyBook/profil.html', {'objet':objet,'chiens':chiens})
+
+def race(request,key):
+    objet = Race.objects.get(id=int(key))
+    return render(request, 'DoggyBook/race.html', {'objet':objet})
+
+def chien(request,key):
+    objet = Chien.objects.get(id=int(key))
+    return render(request, 'DoggyBook/chien.html', {'objet':objet})
 
 
 def subscribe(request):
@@ -105,8 +128,8 @@ def ajoutChien(request):
     date_naissance= request.POST['DateNais']
     couleur_poils= request.POST['CouleursPo']
     couleur_yeux= request.POST['CouleursYe']
-    if (resquest.POST['sexe']=="Mâle"):
-        sexe = 'H'
+    if (request.POST['sexe']=="Mâle"):
+        sexe = 'M'
     else:
         sexe= 'F'
 

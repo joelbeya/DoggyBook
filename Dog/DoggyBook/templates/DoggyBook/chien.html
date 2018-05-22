@@ -17,16 +17,21 @@
                 <!-- Profile -->
                 <div class="w3-card w3-round w3-white">
                     <div class="w3-container">
-                        <h4 class="w3-center">{{objet.first_name}}</h4>
-                        <p> {% include 'DoggyBook/photo_proprio.html' %} </p>
-                        <p class="w3-center"><img src="{{objet.proprio.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+                        <h4 class="w3-center">{{objet.nom}}</h4>
+                        <p> {% include 'DoggyBook/photo_chien.html' %} </p>
+                        <p class="w3-center"><img src="{{objet.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
                         <hr>
-                        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-                        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{objet.proprio.adresse}}</p>
-                        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{objet.proprio.date_naissance}}</p>
-                        {% for chien in chiens %}
-                            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{chien.nom}}</p>
-                        {% endfor %}
+                        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{objet.date_naissance}}</p>
+                        {% if objet.sexe == 'M' %}
+                        <p><i class="fa fa-mars fa-fw w3-margin-right w3-text-theme"></i> Male</p>
+                        {% else %}
+                        <p><i class="fa fa-venus fa-fw w3-margin-right w3-text-theme"></i> Femelle</p>
+                        {% endif %}
+
+                        <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Couleur Poils : {{objet.couleur_poils}}</p>
+                        <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Couleur Yeux : {{objet.couleur_yeux}}</p>
+                        <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Proprio : <a href="/doggybook/profil/{{objet.proprio.user.id}}">{{objet.proprio}}</a></p>
+
                     </div>
                 </div>
 
@@ -70,7 +75,7 @@
                     <span class="w3-right w3-opacity">16 min</span>
                     <h4>Jane Doe</h4><br>
                     <hr class="w3-clear">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <!-- {% include 'DoggyBook/lightbox.html' %} -->
                     <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
                     <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> &nbsp;Comment</button>
                 </div>
@@ -137,6 +142,7 @@
 
     {% endblock content %}
     {% include 'layouts/footer.html' %}
+    <script src="{% static 'js/lightbox.js' %}"></script>
 
 </body>
 </html>
