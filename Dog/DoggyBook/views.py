@@ -91,8 +91,8 @@ def requete(request,obj):
 @login_required(login_url='/doggybook')
 def user(request, key):
     objet = User.objects.get(id=int(key))
-    chiens = objet.proprio.chiens.all()
-    return render(request, 'DoggyBook/profil.html', {'objet':objet,'chiens':chiens})
+    # chiens = objet.proprio.chiens.all()
+    return render(request, 'DoggyBook/profil.html', {'objet':objet})
 
 def race(request,key):
     objet = Race.objects.get(id=int(key))
@@ -156,8 +156,8 @@ def log(request):
         login(request, user)
         return redirect('/doggybook/index')
     else:
-        return HttpResponse("Your username and password didn't match.")
-
+        raise HttpResponse("Your username and password didn't match.")
+        return redirect('/doggybook/index')
 
 @login_required(login_url='/doggybook')
 def log_out(request):
