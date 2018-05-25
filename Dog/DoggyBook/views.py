@@ -94,9 +94,9 @@ def user(request, key):
     chiens = objet.proprio.chiens.all()
     return render(request, 'DoggyBook/profil.html', {'objet':objet,'chiens':chiens})
 
-def race(request,key):
-    objet = Race.objects.get(id=int(key))
-    return render(request, 'DoggyBook/race.html', {'objet':objet})
+def race(request):
+    objets = Race.all()
+    return render(request, 'DoggyBook/race.html', {'objets':objets})
 
 def chien(request,key):
     objet = Chien.objects.get(id=int(key))
@@ -119,7 +119,9 @@ def subscribe(request):
         return redirect('/doggybook/Chien')
     except User.DoesNotExist:
         u = None
-        User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+        u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
+        Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
+
     return redirect('/doggybook/index')
     #
     # if User.objects.get(email=mail) is not None:
@@ -177,3 +179,16 @@ def log(request):
 def log_out(request):
     logout(request)
     return redirect('/doggybook/index')
+
+def arbre(request,key):
+    objet = Chien.objects.get(id=int(key))
+    return render(request,'DoggyBook/genealogie.html', {'objet':objet})
+
+def arbres(request,key):
+    objet = Chien.objects.get(id=int(key))
+    fraternite = Chien.objects.filter(pere=objet.pere,mere=objet.mere).exclude(id=objet.id)
+    if(objet.sexe == "M"):
+        enfants = Chien.objects.filter(pere=objet)
+    else:
+        enfants = Chien.objects.filter(mere=objet)
+    return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
