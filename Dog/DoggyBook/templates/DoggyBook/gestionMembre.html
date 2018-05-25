@@ -24,21 +24,18 @@
                     {% for objet in objets %}
                         <option value={{objet.id}}>{{object.race}}</option>
                     {% endfor %}
-                    </select>
                     <label for="field4"><span>Père</span><select name="pere" class="select-field"></label>
                     {% for objet in objets %}
                         <option value={{objet.id}}>{{objet.nom}}</option>
                     {% endfor %}
-                    </select>
                     <label for="field4"><span>Mère</span><select name="mere" class="select-field"></label>
                     {% for objet in objets %}
                         <option value={{objet.id}}>{{objet.nom}}</option>
                     {% endfor %}
-                </select>
                     <label for="field4"><span>Sexe</span><select name="sexe" class="select-field">
                         <option value="F">F</option>
                         <option value="M">M</option>
-                    </select></label>
+                    </label>
 
             <div class="container">
                 <img src="{% static 'img/chichi.jpg' %}" alt="Snow">

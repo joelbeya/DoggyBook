@@ -1,38 +1,30 @@
-
 /* Container needed to position the button. Adjust the width as needed */
 .container {
-position: relative;
-top: 100%; left:10%;
- width: 40%;
+    position: relative;
+    top: 100%; left:10%;
+    width: 40%;
 }
 
-/* Make the image responsive */
-.container img {
- width: 50%;
- height: auto;
-}
 
 /* Style the button and place it in the middle of the container/image */
 .container .btn {
- position: absolute;
- top: 50%;
- left: 50%;
- transform: translate(-150%, -150%);
- -ms-transform: translate(-50%, -50%);
- background-color: #555;
- color: white;
- font-size: 16px;
- padding: 12px 24px;
- border: none;
- cursor: pointer;
- border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-150%, -150%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .container .btn:hover {
- background-color: black;
+    background-color: black;
 }
-
-
 
 .accordion {
     background-color: #eee;
@@ -45,8 +37,6 @@ top: 100%; left:10%;
     outline: none;
     transition: 0.4s;
 }
-
-
 
 .active, .accordion:hover {
     background-color: #ccc;
