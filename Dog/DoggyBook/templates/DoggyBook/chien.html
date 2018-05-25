@@ -18,7 +18,9 @@
                 <div class="w3-card w3-round w3-white">
                     <div class="w3-container">
                         <h4 class="w3-center">{{objet.nom}}</h4>
-                        <p> {% include 'DoggyBook/photo_chien.html' %} </p>
+                        {% if request.user.proprio.id == objet.proprio.id %}
+                            <p> {% include 'DoggyBook/photo_chien.html' %} </p>
+                        {% endif %}
                         <p class="w3-center"><img src="{{objet.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
                         <hr>
                         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{objet.date_naissance}}</p>
@@ -75,7 +77,6 @@
                     <span class="w3-right w3-opacity">16 min</span>
                     <h4>Jane Doe</h4><br>
                     <hr class="w3-clear">
-                    <!-- {% include 'DoggyBook/lightbox.html' %} -->
                     <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
                     <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> &nbsp;Comment</button>
                 </div>

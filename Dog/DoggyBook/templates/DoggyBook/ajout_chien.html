@@ -1,0 +1,32 @@
+<form action="/doggybook/ajoutChien/" method="post">
+    {% csrf_token %}
+    <p><input type="text" name="nom" placeholder="Nom" required maxlength="100" /></p>
+    <p><input type="date" name="birth" placeholder="Année de naissance" required /></p>
+    <p><input type="text" name="poils" placeholder="Couleur du poil" required maxlength="100" /></p>
+    <p><input type="text" name="yeux" placeholder="Couleur des yeux" required maxlength="100" /></p>
+    <p><select name="sexe" data-placeholder="Sexe" required>
+        <option value="Male">Mâle</option>
+        <option value="Femelle">Femelle</option>
+    </select></p>
+    
+    <p><select name="race" data-placeholder="Race" required>
+        {% for r in race %}
+            <option value={{r.id}}>{{r.nom}}</option>
+        {% endfor %}
+    </select></p>
+
+    <p><select name="pere" data-placeholder="Père du chien">
+        <option value=0>-</option>
+        {% for c in pere %}
+            <option value={{c.id}}>{{c.nom}}</option>
+        {% endfor %}
+    </select></p>
+
+    <p><select name="mere" data-placeholder="Mère du Chien">
+        <option value=0>-</option>
+        {% for c in mere %}
+            <option value={{c.id}}>{{c.nom}}</option>
+        {% endfor %}
+    </select></p>
+    <input type="submit" value="Ajouter" />
+</form>

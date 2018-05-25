@@ -17,15 +17,22 @@
                 <!-- Profile -->
                 <div class="w3-card w3-round w3-white">
                     <div class="w3-container">
-                        <h4 class="w3-center">{{objet.first_name}}</h4>
-                        <p> {% include 'DoggyBook/photo_proprio.html' %} </p>
+                        <h4 class="w3-center">{{objet.first_name}} {{objet.last_name}}</h4>
+                        {% if request.user.id == objet.id %}
+                            <p> {% include 'DoggyBook/photo_proprio.html' %} </p>
+                        {% endif %}
+                        {% if objet.proprio.photo_profil.url is not None %}
                         <p class="w3-center"><img src="{{objet.proprio.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
                         <hr>
+                        {% endif %}
                         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
                         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{objet.proprio.adresse}}</p>
                         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{objet.proprio.date_naissance}}</p>
+                        {% if request.user.id == objet.id %}
+                            <a href="/doggybook/ajoutC"> Ajouter un chien </a> 
+                        {% endif %}
                         {% for chien in chiens %}
-                            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{chien.nom}}</p>
+                           <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Chiens : <a href="/doggybook/chien/{{chien.id}}">{{chien.nom}}</a></p>
                         {% endfor %}
                     </div>
                 </div>
