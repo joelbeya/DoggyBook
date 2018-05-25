@@ -4,7 +4,7 @@ def run():
 	print("Cela va supprimer toute la base de données pour rajouter de nouvelles instances, en êtes-vous sûrs ?")
 	input("Appuyez sur une Entrée pour valider")
 
-
+	User.objects.all().delete()
 	Proprietaire.objects.all().delete()
 	Race.objects.all().delete()
 	Chien.objects.all().delete()

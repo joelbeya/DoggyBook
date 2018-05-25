@@ -163,7 +163,7 @@ def ajoutChien(request):
             Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race,mere=mere)
         else:
             Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race)
-    txt='doggybook/profil/' + str(request.user.id)
+    txt='/doggybook/profil/' + str(request.user.id)
     return redirect(txt)
 
 def log(request):
