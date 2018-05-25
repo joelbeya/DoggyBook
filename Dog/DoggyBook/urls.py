@@ -18,6 +18,7 @@ urlpatterns = [
 	url(r'^index', views.index,name='index'),
 	url(r'^subscribe', views.subscribe),
 	url(r'^gestionMembre$', views.gestionMembre, name='gestionMembre'),
+	url(r'^ajoutC$', views.ajoutC),
 	url(r'^ajoutChien', views.ajoutChien),
 	url(r'^login', views.log),
 	url(r'^logout', views.log_out),
