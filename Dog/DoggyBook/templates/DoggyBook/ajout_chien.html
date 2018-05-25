@@ -1,32 +1,115 @@
-<form action="/doggybook/ajoutChien/" method="post">
-    {% csrf_token %}
-    <p><input type="text" name="nom" placeholder="Nom" required maxlength="100" /></p>
-    <p><input type="date" name="birth" placeholder="Année de naissance" required /></p>
-    <p><input type="text" name="poils" placeholder="Couleur du poil" required maxlength="100" /></p>
-    <p><input type="text" name="yeux" placeholder="Couleur des yeux" required maxlength="100" /></p>
-    <p><select name="sexe" data-placeholder="Sexe" required>
-        <option value="Male">Mâle</option>
-        <option value="Femelle">Femelle</option>
-    </select></p>
-    
-    <p><select name="race" data-placeholder="Race" required>
-        {% for r in race %}
-            <option value={{r.id}}>{{r.nom}}</option>
-        {% endfor %}
-    </select></p>
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang=fr>
+<head>
+    <meta charset="utf-8">
+    <title>DoggyBook</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg" href="{% static 'img/doggybook.svg' %}" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/GestionMembre.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/business-casual.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/section.css' %}" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+</head>
 
-    <p><select name="pere" data-placeholder="Père du chien">
-        <option value=0>-</option>
-        {% for c in pere %}
-            <option value={{c.id}}>{{c.nom}}</option>
-        {% endfor %}
-    </select></p>
+<body>
 
-    <p><select name="mere" data-placeholder="Mère du Chien">
-        <option value=0>-</option>
-        {% for c in mere %}
-            <option value={{c.id}}>{{c.nom}}</option>
+    {% include 'layouts/_navbar.html' %}
+
+    <br><br><br><br>
+
+    <button class="accordion">Ajouter un chien</button>
+    <div class="panel">
+        <div class="form-style-3">
+            <form action="/doggybook/ajoutChien/" method="post">
+                {% csrf_token %}
+                <br> <br>
+                <label for="field1"><input type="text" class="input-field" name="nom" placeholder="Nom du chien" required maxlength="100"/></label>
+                <label for="field2"><input type="date" class="input-field" name="birth" value="" placeholder="Année de naissance" required/></label>
+                <label for="field3"><input type="text" class="input-field" name="poils" value="" placeholder="Couleur des poil" required maxlength="100"/></label>
+                <label for="field1"><input type="text" class="input-field" name="yeux" value="" placeholder="Couleur des yeux" required maxlength="100"/></label>
+                <label for="field4"><select name="sexe" class="select-field" required>
+                    <option value="" selected disabled hidden>Sexe</option>
+                    <option value="M">Mâle</option>
+                    <option value="F">Femelle</option>
+                </select></label>
+
+                <label for="field4"><select name="race" data-placeholder="Race" class="select-field" required>
+                    <option value="" selected disabled hidden>Race</option>
+                {% for r in race %}
+                    <option value={{r.id}}>{{r.nom}}</option>
+                {% endfor %}
+                </select></label>
+                <label for="field4"><select name="pere" data-placeholder="Père" class="select-field">
+                    <option value="" selected disabled hidden>Père</option>
+                    <option value=0>-</option>
+                {% for c in pere %}
+                    <option value={{c.id}}>{{c.nom}}</option>
+                {% endfor %}
+                </select></label>
+                <label for="field4"><select name="mere" data-placeholder="Mère" class="select-field">
+                    <option value="" selected disabled hidden>Mère</option>
+                    <option value=0>-</option>
+                {% for c in mere %}
+                    <option value={{c.id}}>{{c.nom}}</option>
+                {% endfor %}
+                </select></label>
+
+                <div class="container">
+                    <p class="w3-center"><input id="id_image" type="file" class="" name="image"></p>
+                    <img src="{% static 'img/chichi.jpg' %}" class="w3-circle" style="height:106px;width:106px" alt="Photo profil chien">
+                    <br><br>
+                    <input type="submit" value="Ajouter chien"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <button class="accordion">Modifier les informations d'un chien</button>
+    <div class="panel">
+        {% for c in chiens %}
+        <div class="card">
+            <p class="w3-center"><img src="{{c.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="profil_chien_{{c.nom}}"/></p>
+            <div class="container">
+                <h4><b>{{c.nom}}</b></h4>
+            </div>
+        </div>
         {% endfor %}
-    </select></p>
-    <input type="submit" value="Ajouter" />
-</form>
+
+    </div>
+
+    <button class="accordion">Supprimer un chien</button>
+    <div class="panel">
+        {% for c in chiens %}
+        <div class="card">
+            <p class="w3-center"><img src="{{c.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="profil_chien_{{c.nom}}"/></p>
+            <div class="container">
+                <h4><b>{{c.nom}}</b></h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% include 'layouts/script.html' %}
+    <script src="{% static 'js/accordion.js' %}"></script>
+
+
+
+    {% endblock content %}
+    {% include 'layouts/footer.html' %}
+
+</body>
+</html>

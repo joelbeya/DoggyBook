@@ -133,7 +133,8 @@ def ajoutC(request):
     race = Race.all().order_by('nom')
     pere = Chien.objects.filter(sexe='M').order_by('nom')
     mere = Chien.objects.filter(sexe='F').order_by('nom')
-    return render(request, 'DoggyBook/ajout_chien.html',{'race':race, 'pere':pere, 'mere':mere})
+    chiens = Chien.all()
+    return render(request, 'DoggyBook/ajout_chien.html',{'race':race, 'pere':pere, 'mere':mere, 'chiens':chiens})
 
 @login_required(login_url='/doggybook')
 def ajoutChien(request):
@@ -160,7 +161,8 @@ def ajoutChien(request):
             Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race,mere=mere)
         else:
             Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race)
-    return redirect('/doggybook/index')
+    txt='doggybook/profil/' + str(request.user.id)
+    return redirect(txt)
 
 def log(request):
     username = request.POST['mail']
