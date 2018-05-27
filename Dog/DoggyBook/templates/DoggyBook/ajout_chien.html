@@ -53,16 +53,16 @@
                     <option value={{r.id}}>{{r.nom}}</option>
                 {% endfor %}
                 </select></label>
-                <label for="field4"><select name="pere" data-placeholder="Père" class="select-field">
+                <label for="field4"><select name="pere" data-placeholder="Père" class="select-field" required>
                     <option value="" selected disabled hidden>Père</option>
-                    <option value=0>-</option>
+                    <option value="None">-</option>
                 {% for c in pere %}
                     <option value={{c.id}}>{{c.nom}}</option>
                 {% endfor %}
                 </select></label>
-                <label for="field4"><select name="mere" data-placeholder="Mère" class="select-field">
+                <label for="field4"><select name="mere" data-placeholder="Mère" class="select-field" required>
                     <option value="" selected disabled hidden>Mère</option>
-                    <option value=0>-</option>
+                    <option value="None">-</option>
                 {% for c in mere %}
                     <option value={{c.id}}>{{c.nom}}</option>
                 {% endfor %}
@@ -82,7 +82,9 @@
     <div class="panel">
         {% for c in chiens %}
         <div class="card">
-            <p class="w3-center"><img src="{{c.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="profil_chien_{{c.nom}}"/></p>
+            {% if c.photo_profil.url is not None %}
+                <p class="w3-center"><img src="{{c.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="profil_chien_{{c.nom}}"/></p>
+            {% endif %}
             <div class="container">
                 <h4><b>{{c.nom}}</b></h4>
             </div>
@@ -95,7 +97,9 @@
     <div class="panel">
         {% for c in chiens %}
         <div class="card">
+            {% if c.photo_profil.url is not None %}
             <p class="w3-center"><img src="{{c.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="profil_chien_{{c.nom}}"/></p>
+            {% endif %}
             <div class="container">
                 <h4><b>{{c.nom}}</b></h4>
             </div>

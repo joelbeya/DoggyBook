@@ -21,7 +21,9 @@
                         {% if request.user.proprio.id == objet.proprio.id %}
                             <p> {% include 'DoggyBook/photo_chien.html' %} </p>
                         {% endif %}
-                        <p class="w3-center"><img src="{{objet.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+                        {% if objet.photo_profil.url is not None %}
+                            <p class="w3-center"><img src="{{objet.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+                        {% endif %}
                         <hr>
                         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{objet.date_naissance}}</p>
                         {% if objet.sexe == 'M' %}

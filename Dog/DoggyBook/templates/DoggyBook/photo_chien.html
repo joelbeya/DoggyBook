@@ -1,5 +1,5 @@
 {% block content %}
-<form action="{% url 'DoggyBook:upload_pic_chien' %}" method="post" enctype="multipart/form-data">
+<form action="/doggybook/upload_pic_chien/{{key}}"" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p><input id="id_image" type="file" class="" name="image"></p>
     <input type="submit" value="Submit"/>
