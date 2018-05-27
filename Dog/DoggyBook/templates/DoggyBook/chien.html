@@ -21,7 +21,9 @@
                         {% if request.user.proprio.id == objet.proprio.id %}
                             <p> {% include 'DoggyBook/photo_chien.html' %} </p>
                         {% endif %}
-                        <p class="w3-center"><img src="{{objet.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+                        {% if objet.photo_profil.url is not None %}
+                            <p class="w3-center"><img src="{{objet.photo_profil.url}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+                        {% endif %}
                         <hr>
                         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{objet.date_naissance}}</p>
                         {% if objet.sexe == 'M' %}
@@ -33,6 +35,7 @@
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Couleur Poils : {{objet.couleur_poils}}</p>
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Couleur Yeux : {{objet.couleur_yeux}}</p>
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Proprio : <a href="/doggybook/profil/{{objet.proprio.user.id}}">{{objet.proprio}}</a></p>
+                        <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Arbre généalogique : <a href="/doggybook/arbres/{{objet.id}}">arbre</a></p>
 
                     </div>
                 </div>
@@ -136,6 +139,11 @@
                 </div>
             <!-- End Right Column -->
             </div>
+        </div>
+    </div>
+    <div class="w3-col m2">
+        <div class="w3-card w3-round w3-white w3-padding-54 w3-center">
+            <p><i class="fa fa-bug w3-xxlarge"></i></p>
         </div>
     </div>
 

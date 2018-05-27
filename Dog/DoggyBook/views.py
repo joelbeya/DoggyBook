@@ -196,4 +196,8 @@ def arbres(request,key):
         enfants = Chien.objects.filter(pere=objet)
     else:
         enfants = Chien.objects.filter(mere=objet)
+<<<<<<< HEAD
     return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
+=======
+    return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
+>>>>>>> 724a33ccfb1dbac00b7965d521bb18fd674eca02
