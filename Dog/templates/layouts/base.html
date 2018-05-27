@@ -2,8 +2,17 @@
 {% load static %}
 {% include 'layouts/head.html' %}
 <body>
-
     {% include 'layouts/_navbar.html' %}
+
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}"><script>alert("{{ message }}")
+          </script></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
     {% include 'layouts/header.html' %}
 
     {% include 'layouts/footer.html' %}
