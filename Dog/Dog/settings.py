@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 from django.core.exceptions import ImproperlyConfigured
+from django.contrib.messages import constants as message_constants
+MESSAGE_LEVEL = message_constants.DEBUG
+
 
 def get_env_variable(var_name, default_value=None):
     try:

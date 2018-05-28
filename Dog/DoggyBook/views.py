@@ -21,18 +21,18 @@ from .models import *
 def index(request):
     objets = Chien.objects.order_by('-created_at');
     return render(request, 'DoggyBook/index.html', {'objets':objets})
-# Pour l'image dans le rapport
 
 
 
-def upload_pic_chien(request):
+def upload_pic_chien(request,key):
     if request.method == 'POST':
         form = ImageUploadForm_chien(request.POST, request.FILES)
         if form.is_valid():
-            c = Chien()
+            c = Chien.objects.get(id=int(key))
             c.photo_profil = form.cleaned_data['image']
             c.save()
-            return HttpResponse('image upload success')
+            a = '/doggybook/chien/' + str(c.id)
+            return redirect(a)
     return HttpResponseForbidden('allowed only via POST')
 
 
@@ -100,7 +100,7 @@ def race(request):
 
 def chien(request,key):
     objet = Chien.objects.get(id=int(key))
-    return render(request, 'DoggyBook/chien.html', {'objet':objet})
+    return render(request, 'DoggyBook/chien.html', {'objet':objet,'key':key})
 
 
 def subscribe(request):
@@ -151,18 +151,21 @@ def ajoutChien(request):
 
     proprio = request.user.proprio
     race = Race.objects.get(id=int(request.POST['race']))
-    if (request.POST['pere'] != '0'):
+    if (request.POST['pere'] != "None"):
         pere = Chien.objects.get(id=int(request.POST['pere']))
-        if (request.POST['mere'] != '0'):
-            mere = Chien.objects.get(id=int(request.POST['mere']))
-            Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race,pere=pere,mere=mere)
-        else:
-            Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race,pere=pere)
     else:
-        if (request.POST['mere'] != '0'):
-            Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race,mere=mere)
-        else:
-            Chien.objects.create(nom=nom, date_naissance=date_naissance, couleur_poils=couleur_poils, couleur_yeux=couleur_yeux, sexe=sexe, proprio=proprio, race=race)
+        pere = None
+    if (request.POST['mere'] != "None"):
+        mere = Chien.objects.get(id=int(request.POST['mere']))
+    else:
+        mere = None
+    c = Chien.objects.create(nom=nom,date_naissance=date_naissance,couleur_poils=couleur_poils,couleur_yeux=couleur_yeux,sexe=sexe,proprio=proprio,race=race,pere=pere,mere=mere)
+    if (request.POST['image'] is not None):
+        form = ImageUploadForm_chien(request.POST, request.FILES)
+        if form.is_valid():
+            c.photo_profil = form.cleaned_data['image']
+            c.save()
+
     txt='/doggybook/profil/' + str(request.user.id)
     return redirect(txt)
 
@@ -193,4 +196,8 @@ def arbres(request,key):
         enfants = Chien.objects.filter(pere=objet)
     else:
         enfants = Chien.objects.filter(mere=objet)
+<<<<<<< HEAD
     return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
+=======
+    return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
+>>>>>>> 724a33ccfb1dbac00b7965d521bb18fd674eca02
