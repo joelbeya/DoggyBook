@@ -164,36 +164,34 @@
                     <option value={{c.id}}>{{c.nom}}</option>
                 {% endfor %}
                 </select></label>
-
-                <div class="container">
-                    <p class="w3-center"><input id="id_image" type="file" class="" name="image"></p>
-                    <img src="{% static 'img/chichi.jpg' %}" class="w3-circle" style="height:106px;width:106px" alt="Photo profil chien">
-                    <br><br>
-                    <input type="submit" value="Ajouter chien"/>
-                </div>
+                <input type="submit" value="Ajouter chien"/>
             </form>
         </div>
     </div>
 
     <button class="accordion">Modifier les informations d'un chien</button>
     <div class="panel">
+        <br> <br>
+        {% include 'DoggyBook/modifC.html' %}
         <div class="w3-row-padding">
         	{% for c in chiens %}
-            <div class="w3-third w3-container w3-margin-bottom">
-                {% if c.photo_profil.url is not None %}
-                <p class="w3-center"><img src="{{c.photo_profil.url}}" alt="Photo_profil_chien_{{c.nom}}" style="height:106px;width:106px" class="w3-circle"></p>
-                {% endif %}
-                <div class="w3-container w3-white w3-center">
-                    <p><b>{{c.nom}}</b></p>
+            <a data-toggle="modal" href="DoggyBook/modifC views.modifC #modal_modif_chien" class="w3-bar-item w3-button" style="text-decoration: none">
+                <div class="w3-third w3-container w3-margin-bottom">
+                    {% if c.photo_profil.url is not None %}
+                    <p class="w3-center"><img src="{{c.photo_profil.url}}" alt="Photo_profil_chien_{{c.nom}}" style="height:106px;width:106px" class="w3-circle"></p>
+                    {% endif %}
+                    <div class="w3-center">
+                        <p><b>{{c.nom}}</b></p>
+                    </div>
                 </div>
-            </div>
+            </a>
             {% endfor %}
-            <a data-toggle="modal" href="DoggyBook/modifC views.modifC #modal_connexion" class="w3-bar-item w3-button" style="text-decoration: none"><i class="fa fa-user"></i> Inscription</a>
         </div>
     </div>
 
     <button class="accordion">Supprimer un chien</button>
     <div class="panel">
+        <br> <br>
         <div class="w3-row-padding">
         	{% for c in chiens %}
             <div class="w3-third w3-container w3-margin-bottom">

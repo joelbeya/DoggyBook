@@ -1,8 +1,26 @@
 {% block content %}
-<form action="{% url 'DoggyBook:upload_pic_user' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p><input id="id_image" type="file" class="" name="image"></p>
-    <input type="submit" value="Submit" />
+<form class="photo_profil_form" action="{% url 'DoggyBook:upload_pic_user' %}" method="post" enctype="multipart/form-data">
+    <div class="modal fade" id="modal_profil_form" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajout Photo de Profil</h4>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <p class="w3-center"><img id="pre_image" src="{{objet.proprio.photo_profil.url}}" class="w3-circle" style="height:300px;width:300px" alt="Preview"/></p>
+                    <br>
+                    <p><input id="id_image" type="file" class="" name="image"></p>
+                    <p><input type="submit" value="Submit" /></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 
 {% endblock %}
