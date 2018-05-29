@@ -1,6 +1,7 @@
 __pychache__/
 DoggyBook/db.sqlite3
-
+DoggyBook/Dog/DoggyBook/__pycache__/
+DoggyBook/Dog/DoggyBook/migrations/
 DoggyBook/Dog/__pychache__/
 *.py[cod]
 
