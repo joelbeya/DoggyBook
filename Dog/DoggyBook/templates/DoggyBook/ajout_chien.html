@@ -192,16 +192,20 @@
     <button class="accordion">Supprimer un chien</button>
     <div class="panel">
         <br> <br>
+        {% include 'DoggyBook/supprC.html' %}
         <div class="w3-row-padding">
         	{% for c in chiens %}
+
+             <a data-toggle="modal" href="DoggyBook/supprC views.supprC #modal_suppr_chien" onclick="affecte2({{c.id}})" class="w3-bar-item w3-button" style="text-decoration: none">
             <div class="w3-third w3-container w3-margin-bottom">
                 {% if c.photo_profil.url is not None %}
                 <p class="w3-center"><img src="{{c.photo_profil.url}}" alt="Photo_profil_chien_{{c.nom}}" style="height:106px;width:106px" class="w3-circle"></p>
                 {% endif %}
-                <div class="w3-container w3-white w3-center">
+                <div class="w3-center">
                     <p><b>{{c.nom}}</b></p>
                 </div>
             </div>
+            </a>
             {% endfor %}
         </div>
     </div>
@@ -212,7 +216,10 @@
             function affecte(id) {
             document.getElementById("id_chien").value = id;
         } </script>
-
+        <script>
+            function affecte2(id) {
+            document.getElementById("id_chien2").value = id;
+        } </script>
 
     {% endblock content %}
     {% include 'layouts/footer.html' %}

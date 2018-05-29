@@ -26,7 +26,7 @@ urlpatterns = [
 	url(r'^chien/(?P<key>[0-9]*)$', views.chien),
 	url(r'^modifP$', views.modifP),
 	url(r'^modifChien$', views.modifC),
-	url(r'^supprC$', views.supprC),
+	url(r'^supprChien$', views.supprC),
 	#url(r'^basic-upload/$', views.BasicUploadView.as_view(), name='basic_upload'),
 	url(r'^profil/(?P<key>[0-9]*)$', views.user),
 	url(r'^arbre/(?P<key>[0-9]*)$', views.arbre),

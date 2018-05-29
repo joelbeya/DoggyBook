@@ -213,10 +213,10 @@ def modifC(request):
 
 @login_required(login_url='/doggybook')
 def supprC(request):
-    c = Chien.objects.get(id=int(request.POST['idC']))
+    c = Chien.objects.get(id=int(request.POST['id']))
     c.delete()
   
-    txt='/doggybook/profil/' + str(u.id)
+    txt='/doggybook/profil/' + str(request.user.id)
     return redirect(txt)
 
 def log(request):
