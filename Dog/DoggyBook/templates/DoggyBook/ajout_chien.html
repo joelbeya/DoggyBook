@@ -23,6 +23,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
+    <script> function PopupCentrer(page,largeur,hauteur,options) { var top=(screen.height-hauteur)/2; var left=(screen.width-largeur)/2; window.open(page,"","top="+top+",left="+left+",width="+largeur+",height="+hauteur+","+options); } </script>
 </head>
 
 <body>
@@ -30,6 +31,22 @@
     {% include 'layouts/_navbar.html' %}
 
     <br><br><br><br>
+
+    <button class="accordion">Modifier le profil</button>
+    <div class="panel">
+        <div class="form-style-3">
+            <form action="/doggybook/modifP" method="post">
+                {% csrf_token %}
+                <br> <br>
+                <label for="field1"><input type="text" class="input-field" name="nom" placeholder="Nom" value={{user.last_name}} required maxlength="100"/></label>
+                <label for="field1"><input type="text" class="input-field" name="prenom" placeholder="Prenom" value={{user.first_name}} required maxlength="100"/></label>
+                <label for="field2"><input type="date" class="input-field" name="birth" value={{user.proprio.date_naissance}} placeholder="Année de naissance" required /></label>
+                <label for="field1"><input type="text" class="input-field" name="tel" placeholder="Telephone" value={{user.proprio.telephone}} required maxlength="100"/></label>
+
+                <input type="submit" value="Modifier les informations"/>
+            </form>
+        </div>
+    </div>
 
     <button class="accordion">Ajouter un chien</button>
     <div class="panel">
@@ -171,6 +188,7 @@
                 </div>
             </div>
             {% endfor %}
+            <a data-toggle="modal" href="DoggyBook/modifC views.modifC #modal_connexion" class="w3-bar-item w3-button" style="text-decoration: none"><i class="fa fa-user"></i> Inscription</a>
         </div>
     </div>
 

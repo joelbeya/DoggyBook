@@ -113,14 +113,15 @@ def subscribe(request):
     else:
         sexe = 'F'
     date_naissance = request.POST['birth']
+    tel = request.POST['tel']
 
     try:
         u = User.objects.get(email=mail)
-        return redirect('/doggybook/Chien')
+        return redirect('/doggybook')
     except User.DoesNotExist:
         u = None
         u = User.objects.create_user(username=mail, email=mail, first_name=prenom, last_name=nom, password=password)
-        Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe)
+        Proprietaire.objects.create(user=u, date_naissance = date_naissance, sexe=sexe, telephone=tel)
 
     return redirect('/doggybook/index')
     #
@@ -135,7 +136,7 @@ def ajoutC(request):
     race = Race.all().order_by('nom')
     pere = Chien.objects.filter(sexe='M').order_by('nom')
     mere = Chien.objects.filter(sexe='F').order_by('nom')
-    chiens = Chien.all()
+    chiens = request.user.proprio.chiens.filter()
     return render(request, 'DoggyBook/ajout_chien.html',{'race':race, 'pere':pere, 'mere':mere, 'chiens':chiens})
 
 @login_required(login_url='/doggybook')
@@ -160,13 +161,62 @@ def ajoutChien(request):
     else:
         mere = None
     c = Chien.objects.create(nom=nom,date_naissance=date_naissance,couleur_poils=couleur_poils,couleur_yeux=couleur_yeux,sexe=sexe,proprio=proprio,race=race,pere=pere,mere=mere)
-    if (request.POST['image'] is not None):
-        form = ImageUploadForm_chien(request.POST, request.FILES)
-        if form.is_valid():
-            c.photo_profil = form.cleaned_data['image']
-            c.save()
 
     txt='/doggybook/profil/' + str(request.user.id)
+    return redirect(txt)
+
+
+@login_required(login_url='/doggybook')
+def modifP(request):
+    nom = request.POST['nom']
+    prenom = request.POST['prenom']
+    date_naissance = request.POST['birth']
+    tel = request.POST['tel']
+    u = request.user
+    p = u.proprio
+    u.last_name=nom
+    u.first_name=prenom
+    p.date_naissance=date_naissance
+    p.telephone=tel
+    u.save()
+    p.save()
+  
+    txt='/doggybook/profil/' + str(u.id)
+    return redirect(txt)
+
+@login_required(login_url='/doggybook')
+def modifC(request):
+    nom = request.POST['nom']
+    date_naissance = request.POST['birth']
+    couleur_poils = request.POST['poils']
+    couleur_yeux = request.POST['yeux']
+    if (request.POST['pere'] != "None"):
+        pere = Chien.objects.get(id=int(request.POST['pere']))
+    else:
+        pere = None
+    if (request.POST['mere'] != "None"):
+        mere = Chien.objects.get(id=int(request.POST['mere']))
+    else:
+        mere = None
+
+    c = Chien.objects.get(id=int(request.POST['idC']))
+    c.nom = nom
+    c.date_naissance=date_naissance
+    c.couleur_poils=couleur_poils
+    c.couleur_yeux=couleur_yeux
+    c.mere=mere
+    c.pere=pere
+    c.save()
+  
+    txt='/doggybook/profil/' + str(u.id)
+    return redirect(txt)
+
+@login_required(login_url='/doggybook')
+def supprC(request):
+    c = Chien.objects.get(id=int(request.POST['idC']))
+    c.delete()
+  
+    txt='/doggybook/profil/' + str(u.id)
     return redirect(txt)
 
 def log(request):
