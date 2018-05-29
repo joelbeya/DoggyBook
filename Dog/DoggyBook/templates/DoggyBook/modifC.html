@@ -1,4 +1,4 @@
-<form class="modif_chien" action="/doggybook/modifChien/" method="post">
+<form class="modif_chien" action="/doggybook/modifChien" method="post">
     <div class="modal fade" id="modal_modif_chien" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -9,6 +9,11 @@
                 </div>
                 <div class="modal-body">
                     {% csrf_token %}
+
+                    <label for="field1"><input type="text" class="input-field" name="nom" placeholder="Nom" required maxlength="100"/></label>
+
+                    <input type='hidden' name='id' id='id_chien' />
+
                     <label for="field1"><select name="poils" class="select-field" required/>
                         <option value="" selected disabled hidden>Couleur des poils</option>
                         <option value=Amande>Amande</option>
@@ -108,8 +113,6 @@
                         <option value={{c.id}}>{{c.nom}}</option>
                     {% endfor %}
                     </select></label>
-
-                    <input type="hidden" name="idC" value={{c.id}} />
 
 
                     <input type="submit" value="Modifier" />
