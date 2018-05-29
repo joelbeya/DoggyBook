@@ -23,6 +23,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
+    <script> function PopupCentrer(page,largeur,hauteur,options) { var top=(screen.height-hauteur)/2; var left=(screen.width-largeur)/2; window.open(page,"","top="+top+",left="+left+",width="+largeur+",height="+hauteur+","+options); } </script>
 </head>
 
 <body>
@@ -30,6 +31,22 @@
     {% include 'layouts/_navbar.html' %}
 
     <br><br><br><br>
+
+    <button class="accordion">Modifier le profil</button>
+    <div class="panel">
+        <div class="form-style-3">
+            <form action="/doggybook/modifP" method="post">
+                {% csrf_token %}
+                <br> <br>
+                <label for="field1"><input type="text" class="input-field" name="nom" placeholder="Nom" value={{user.last_name}} required maxlength="100"/></label>
+                <label for="field1"><input type="text" class="input-field" name="prenom" placeholder="Prenom" value={{user.first_name}} required maxlength="100"/></label>
+                <label for="field2"><input type="date" class="input-field" name="birth" value={{user.proprio.date_naissance}} placeholder="Année de naissance" required /></label>
+                <label for="field1"><input type="text" class="input-field" name="tel" placeholder="Telephone" value={{user.proprio.telephone}} required maxlength="100"/></label>
+
+                <input type="submit" value="Modifier les informations"/>
+            </form>
+        </div>
+    </div>
 
     <button class="accordion">Ajouter un chien</button>
     <div class="panel">
@@ -147,35 +164,34 @@
                     <option value={{c.id}}>{{c.nom}}</option>
                 {% endfor %}
                 </select></label>
-
-                <div class="container">
-                    <p class="w3-center"><input id="id_image" type="file" class="" name="image"></p>
-                    <img src="{% static 'img/chichi.jpg' %}" class="w3-circle" style="height:106px;width:106px" alt="Photo profil chien">
-                    <br><br>
-                    <input type="submit" value="Ajouter chien"/>
-                </div>
+                <input type="submit" value="Ajouter chien"/>
             </form>
         </div>
     </div>
 
     <button class="accordion">Modifier les informations d'un chien</button>
     <div class="panel">
+        <br> <br>
+        {% include 'DoggyBook/modifC.html' %}
         <div class="w3-row-padding">
         	{% for c in chiens %}
-            <div class="w3-third w3-container w3-margin-bottom">
-                {% if c.photo_profil.url is not None %}
-                <p class="w3-center"><img src="{{c.photo_profil.url}}" alt="Photo_profil_chien_{{c.nom}}" style="height:106px;width:106px" class="w3-circle"></p>
-                {% endif %}
-                <div class="w3-container w3-white w3-center">
-                    <p><b>{{c.nom}}</b></p>
+            <a data-toggle="modal" href="DoggyBook/modifC views.modifC #modal_modif_chien" class="w3-bar-item w3-button" style="text-decoration: none">
+                <div class="w3-third w3-container w3-margin-bottom">
+                    {% if c.photo_profil.url is not None %}
+                    <p class="w3-center"><img src="{{c.photo_profil.url}}" alt="Photo_profil_chien_{{c.nom}}" style="height:106px;width:106px" class="w3-circle"></p>
+                    {% endif %}
+                    <div class="w3-center">
+                        <p><b>{{c.nom}}</b></p>
+                    </div>
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
     </div>
 
     <button class="accordion">Supprimer un chien</button>
     <div class="panel">
+        <br> <br>
         <div class="w3-row-padding">
         	{% for c in chiens %}
             <div class="w3-third w3-container w3-margin-bottom">
