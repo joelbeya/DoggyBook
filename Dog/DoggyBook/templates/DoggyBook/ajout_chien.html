@@ -23,7 +23,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
-    <script> function PopupCentrer(page,largeur,hauteur,options) { var top=(screen.height-hauteur)/2; var left=(screen.width-largeur)/2; window.open(page,"","top="+top+",left="+left+",width="+largeur+",height="+hauteur+","+options); } </script>
 </head>
 
 <body>
@@ -175,7 +174,8 @@
         {% include 'DoggyBook/modifC.html' %}
         <div class="w3-row-padding">
         	{% for c in chiens %}
-            <a data-toggle="modal" href="DoggyBook/modifC views.modifC #modal_modif_chien" class="w3-bar-item w3-button" style="text-decoration: none">
+            
+            <a data-toggle="modal" href="DoggyBook/modifC views.modifC #modal_modif_chien" onclick="affecte({{c.id}})" class="w3-bar-item w3-button" style="text-decoration: none">
                 <div class="w3-third w3-container w3-margin-bottom">
                     {% if c.photo_profil.url is not None %}
                     <p class="w3-center"><img src="{{c.photo_profil.url}}" alt="Photo_profil_chien_{{c.nom}}" style="height:106px;width:106px" class="w3-circle"></p>
@@ -208,7 +208,10 @@
 
     {% include 'layouts/script.html' %}
     <script src="{% static 'js/accordion.js' %}"></script>
-
+    <script>
+            function affecte(id) {
+            document.getElementById("id_chien").value = id;
+        } </script>
 
 
     {% endblock content %}

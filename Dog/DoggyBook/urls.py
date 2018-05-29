@@ -25,7 +25,7 @@ urlpatterns = [
 	#url(r'^race/(?P<key>[0-9]*)$', views.race),
 	url(r'^chien/(?P<key>[0-9]*)$', views.chien),
 	url(r'^modifP$', views.modifP),
-	url(r'^modifC$', views.modifC),
+	url(r'^modifChien$', views.modifC),
 	url(r'^supprC$', views.supprC),
 	#url(r'^basic-upload/$', views.BasicUploadView.as_view(), name='basic_upload'),
 	url(r'^profil/(?P<key>[0-9]*)$', views.user),

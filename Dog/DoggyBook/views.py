@@ -199,7 +199,7 @@ def modifC(request):
     else:
         mere = None
 
-    c = Chien.objects.get(id=int(request.POST['idC']))
+    c = Chien.objects.get(id=int(request.POST['id']))
     c.nom = nom
     c.date_naissance=date_naissance
     c.couleur_poils=couleur_poils
@@ -208,7 +208,7 @@ def modifC(request):
     c.pere=pere
     c.save()
   
-    txt='/doggybook/profil/' + str(u.id)
+    txt='/doggybook/profil/' + str(request.user.id)
     return redirect(txt)
 
 @login_required(login_url='/doggybook')
