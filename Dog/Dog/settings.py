@@ -41,6 +41,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyBEVeAu18W1F4WfPePFIbOWP34yyvUVcVs'
 
 # Application definition
 
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_google_maps',
     'debug_toolbar',
 ]
 

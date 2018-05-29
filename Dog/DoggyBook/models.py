@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-
+from django_google_maps import fields as map_fields
 
 class SuperClass(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
@@ -66,3 +66,8 @@ class Chien(SuperClass):
 class Photo(models.Model):
     model_pic = models.ImageField(upload_to = 'photos/user/',null=True,blank=True,default = 'DoggyBook/Dog/media/photos/chien/dogo5.jpeg')
     chien = models.ForeignKey(Chien,on_delete=models.SET_NULL,related_name='photos',blank=True,null=True)
+
+class Rental(models.Model):
+    """docstring for Rental."""
+    address = map_fields.AddressField(max_length=200)
+    geolocation = map_fields.GeoLocationField(max_length=100)
