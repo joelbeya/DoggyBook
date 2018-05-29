@@ -1,0 +1,27 @@
+<form class="suppr_chien" action="/doggybook/supprChien" method="post">
+    <div class="modal fade" id="modal_suppr_chien" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Supprimer le chien</h4>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+
+                    <input type='hidden' name='id' id='id_chien2' />
+                    <p> Etes-vous sûr de vouloir supprimer ce chien ? <p>
+
+                   
+                    <input type="submit" value="Confirmer" />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
