@@ -1,0 +1,109 @@
+<form action="/doggybook/modifChien/" method="post">
+    {% csrf_token %}
+    <p><input type="text" name="nom" placeholder="Nom" value={{c.nom}} required maxlength="100" /></p>
+
+    <label for="field1"><select name="poils" class="select-field" required/>
+        <option value="" selected disabled hidden>Couleur des poils</option>
+        <option value=Amande>Amande</option>
+        <option value=Arlequin>Arlequin</option>
+        <option value=Aubère>Aubère</option>
+        <option value=Belton>Belton</option>
+        <option value=Bicolore>Bicolore</option>
+        <option value=Bigarrée>Bigarrée</option>
+        <option value=Blanche>Blanche</option>
+        <option value=Blenheim>Blenheim</option>
+        <option value=Bleu>Bleu</option>
+        <option value=Bringée>Bringée</option>
+        <option value=Caille>Caille</option>
+        <option value=Cerf>Cerf</option>
+        <option value=Charbonnée>Charbonnée</option>
+        <option value=Châtain>Châtain</option>
+        <option value=Chevreuil>Chevreuil</option>
+        <option value=Chocolat>Chocolat</option>
+        <option value=Citron>Citron</option>
+        <option value=Délavée>Délavée</option>
+        <option value=Étoile>Étoile</option>
+        <option value=Fauve>Fauve</option>
+        <option value=Feu>Feu</option>
+        <option value=Flamme>Flamme</option>
+        <option value=Foie>Foie</option>
+        <option value=Isabelle>Isabelle</option>
+        <option value=Ladre>Ladre</option>
+        <option value=Lilas>Lilas</option>
+        <option value=Liste>Liste</option>
+        <option value=Louvet>Louvet</option>
+        <option value=Manteau>Manteau</option>
+        <option value=Marque>Marque</option>
+        <option value=Marron>Marron</option>
+        <option value=Masque>Masque</option>
+        <option value=Merle>Merle</option>
+        <option value=Mouchetée>Mouchetée</option>
+        <option value="Noir & Feu">Noir & Feu</option>
+        <option value=Ombrée>Ombrée</option>
+        <option value=Panachée>Panachée</option>
+        <option value=Panachure>Panachure</option>
+        <option value=Parsemée>Parsemée</option>
+        <option value=Particolore>Particolore</option>
+        <option value="Pastille ou Spot">Pastille ou Spot</option>
+        <option value=Pie>Pie</option>
+        <option value=Plage>Plage</option>
+        <option value=Plaque>Plaque</option>
+        <option value=Pluricolore>Pluricolore</option>
+        <option value=Puce>Puce</option>
+        <option value=Quatrœillé>Quatrœillé</option>
+        <option value=Rouannée>Rouannée</option>
+        <option value=Rouge>Rouge</option>
+        <option value=Roux>Roux</option>
+        <option value=Rubican>Rubican</option>
+        <option value=Rubis>Rubis</option>
+        <option value=Sable>Sable</option>
+        <option value=Selle>Selle</option>
+        <option value=Sésame>Sésame</option>
+        <option value="Sésame Noir">Sésame Noir</option>
+        <option value="Sésame Rouge">Sésame Rouge</option>
+        <option value=Tache>Tache</option>
+        <option value=Tachetée>Tachetée</option>
+        <option value=Tiquetée>Tiquetée</option>
+        <option value=Truiture>Truiture</option>
+        <option value=Urajiro>Urajiro</option>
+        <option value=Zain>Zain</option>
+    </select></label>
+
+    <label for="field1"><select name="yeux" class="select-field" required/>
+        <option value="" selected disabled hidden>Couleur des yeux</option>
+        <option value=Ambre>Ambre</option>
+        <option value=Bleu>Bleu</option>
+        <option value=Dragons>Dragons</option>
+        <option value=Gris>Gris</option>
+        <option value=Marron>Marron</option>
+        <option value=Marron-vert>Marron-vert</option>
+        <option value=Noir>Noir</option>
+        <option value=Noisette>Noisette</option>
+        <option value=Turquoise>Turquoise</option>
+        <option value=Vairons>Vairons</option>
+        <option value=Vert>Vert</option>
+        <option value=Violet>Violet</option>
+    </select></label>
+
+    <p><input type="date" name="birth" placeholder="Année de naissance" required /></p>
+
+    <label for="field4"><select name="pere" data-placeholder="Père" class="select-field" required>
+        <option value="" selected disabled hidden>Père</option>
+        <option value="None">-</option>
+    {% for c in pere %}
+        <option value={{c.id}}>{{c.nom}}</option>
+    {% endfor %}
+    </select></label>
+    <label for="field4"><select name="mere" data-placeholder="Mère" class="select-field" required>
+        <option value="" selected disabled hidden>Mère</option>
+        <option value="None">-</option>
+    {% for c in mere %}
+        <option value={{c.id}}>{{c.nom}}</option>
+    {% endfor %}
+    </select></label>
+
+    <input type="hidden" name="idC" value={{c.id}} />
+
+
+    <input type="submit" value="Modifier" />
+</form>
