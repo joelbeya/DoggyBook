@@ -31,16 +31,19 @@
                         {% else %}
                         <p><i class="fa fa-venus fa-fw w3-margin-right w3-text-theme"></i> Femelle</p>
                         {% endif %}
-
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Couleur Poils : {{objet.couleur_poils}}</p>
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Couleur Yeux : {{objet.couleur_yeux}}</p>
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Proprio : <a href="/doggybook/profil/{{objet.proprio.user.id}}">{{objet.proprio}}</a></p>
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Arbre généalogique : <a href="/doggybook/arbres/{{objet.id}}">arbre</a></p>
+<<<<<<< HEAD
+                        <p> {% include 'DoggyBook/album_detail.html' %} </p>
+=======
                         {% if request.user.proprio.id == objet.proprio.id %}
                             <p> {% include 'DoggyBook/photo_add.html' %} </p>
                         {% endif %}
                         <p><i class="fa fa-plus w3-margin-right w3-text-theme"></i> <a data-toggle="modal" href="DoggyBook/photo_add views.upload_pic #modal_profil_add">Ajouter une photo</a></p>
 
+>>>>>>> 573e2b26ba886ddfedb1b81af49dff2fad6ea8ac
                     </div>
                 </div>
 
