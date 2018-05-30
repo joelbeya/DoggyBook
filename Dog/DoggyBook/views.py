@@ -15,15 +15,30 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
 from .models import *
+<<<<<<< HEAD
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 
+=======
+from django.db.models import Q
+>>>>>>> 573e2b26ba886ddfedb1b81af49dff2fad6ea8ac
 
 # Pour l'image dans le rapport
 
 def index(request):
     objets = Chien.objects.order_by('-created_at');
     return render(request, 'DoggyBook/index.html', {'objets':objets})
+
+
+def upload_pic(request,key):
+    if request.method == 'POST':
+        form = ImageUploadForm_chien(request.POST, request.FILES)
+        if form.is_valid():
+            c = Chien.objects.get(id=int(key))
+            p = Photo.objects.create(model_pic=form.cleaned_data['image'],chien=c)
+            a = '/doggybook/chien/' + str(c.id)
+            return redirect(a)
+    return HttpResponseForbidden('allowed only via POST')
 
 
 
@@ -60,20 +75,6 @@ def photoChien(request, key):
 
 
 
-
-def upload_pic(request):
-    if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            m = Photo()
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-            return HttpResponse('image upload succesS')
-    return HttpResponseForbidden('allowed only via POST')
-
-
-
-
 def gestionMembre(request):
     objets = Chien.objects.all()
     return render(request, 'DoggyBook/gestionMembre.html', {'objets':objets})
@@ -97,9 +98,17 @@ def user(request, key):
     chiens = objet.proprio.chiens.all()
     return render(request, 'DoggyBook/profil.html', {'objet':objet,'chiens':chiens})
 
+def proprietaires(request):
+    objets = Proprietaire.all()
+    return render(request, 'DoggyBook/proprietaires.html', {'objets':objets})
+
 def race(request):
     objets = Race.all()
     return render(request, 'DoggyBook/race.html', {'objets':objets})
+
+def chiens(request):
+    objets = Chien.all()
+    return render(request, 'DoggyBook/chiens.html', {'objets':objets})
 
 def chien(request,key):
     objet = Chien.objects.get(id=int(key))
@@ -216,10 +225,15 @@ def modifC(request):
 
 @login_required(login_url='/doggybook')
 def supprC(request):
-    c = Chien.objects.get(id=int(request.POST['idC']))
+    c = Chien.objects.get(id=int(request.POST['id']))
     c.delete()
+<<<<<<< HEAD
 
     txt='/doggybook/profil/' + str(u.id)
+=======
+  
+    txt='/doggybook/profil/' + str(request.user.id)
+>>>>>>> 573e2b26ba886ddfedb1b81af49dff2fad6ea8ac
     return redirect(txt)
 
 def log(request):
@@ -251,6 +265,7 @@ def arbres(request,key):
         enfants = Chien.objects.filter(mere=objet)
     return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
 
+<<<<<<< HEAD
 
 
 # def gallery(request, key):
@@ -286,3 +301,24 @@ def get_context_data(request, key):
 def handler404(request):
     assert isinstance(request, HttpRequest)
     return render(request, 'handler404.html', None, None, 404)
+=======
+def recherche(request,obj):
+    rech = request.GET['search']
+    filtre = request.GET['but']
+    chiens = Chien.objects.filter(nom__icontains=rech)
+    races = Race.objects.filter(nom__icontains=rech)
+    ps = User.objects.filter(last_name__contains=rech)
+    ps2 = User.objects.filter(first_name__contains=rech)
+    ps3 = []
+    users = []
+    for p in ps:
+        ps3.append(p.id)
+    for p2 in ps2:
+        if ps3.count(p2.id) != 1:
+            ps3.append(p2.id)
+    for p3 in ps3:
+        users.append(User.objects.get(id=p3))
+    return render(request,'DoggyBook/recherche.html', {'chiens':chiens,'races':races,'users':users,'filtre':filtre})
+
+
+>>>>>>> 573e2b26ba886ddfedb1b81af49dff2fad6ea8ac
