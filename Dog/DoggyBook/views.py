@@ -24,6 +24,17 @@ def index(request):
     return render(request, 'DoggyBook/index.html', {'objets':objets})
 
 
+def upload_pic(request,key):
+    if request.method == 'POST':
+        form = ImageUploadForm_chien(request.POST, request.FILES)
+        if form.is_valid():
+            c = Chien.objects.get(id=int(key))
+            p = Photo.objects.create(model_pic=form.cleaned_data['image'],chien=c)
+            a = '/doggybook/chien/' + str(c.id)
+            return redirect(a)
+    return HttpResponseForbidden('allowed only via POST')
+
+
 
 def upload_pic_chien(request,key):
     if request.method == 'POST':
@@ -54,20 +65,6 @@ def upload_pic_user(request):
 def photoChien(request, key):
     objets = Chien.objects.photos(id=int(key))
     return render(request,'DoggyBook/lightbox.html', {'objets':objets})
-
-
-
-
-
-def upload_pic(request):
-    if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            m = Photo()
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-            return HttpResponse('image upload succesS')
-    return HttpResponseForbidden('allowed only via POST')
 
 
 

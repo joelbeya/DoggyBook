@@ -17,7 +17,7 @@
                 <!-- Profile -->
                 <div class="w3-card w3-round w3-white">
                     <div class="w3-container">
-                        <h4 class="w3-center">{{objet.nom}}</h4>
+                        <h1 class="w3-center">{{objet.nom}}</h1>
                         {% if request.user.proprio.id == objet.proprio.id %}
                             <p> {% include 'DoggyBook/photo_chien.html' %} </p>
                         {% endif %}
@@ -36,6 +36,10 @@
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Couleur Yeux : {{objet.couleur_yeux}}</p>
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Proprio : <a href="/doggybook/profil/{{objet.proprio.user.id}}">{{objet.proprio}}</a></p>
                         <p><i class="fa fa-chevron-right w3-margin-right w3-text-theme"></i> Arbre généalogique : <a href="/doggybook/arbres/{{objet.id}}">arbre</a></p>
+                        {% if request.user.proprio.id == objet.proprio.id %}
+                            <p> {% include 'DoggyBook/photo_add.html' %} </p>
+                        {% endif %}
+                        <p><i class="fa fa-plus w3-margin-right w3-text-theme"></i> <a data-toggle="modal" href="DoggyBook/photo_add views.upload_pic #modal_profil_add">Ajouter une photo</a></p>
 
                     </div>
                 </div>

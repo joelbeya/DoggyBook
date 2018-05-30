@@ -9,7 +9,7 @@ app_name='DoggyBook'
 urlpatterns = [
 
 	url(r'^$', views.index, name='index'),
-	url(r'^upload_pic$', views.upload_pic, name = 'upload_pic'),
+	url(r'^upload_pic/(?P<key>[0-9]*)$', views.upload_pic, name = 'upload_pic'),
 	url(r'^upload_pic_user$', views.upload_pic_user, name = 'upload_pic_user'),
 	url(r'^upload_pic_chien/(?P<key>[0-9]*)$', views.upload_pic_chien, name = 'upload_pic_chien'),
 	url(r'^photo/',TemplateView.as_view(template_name = 'photo.html')),
