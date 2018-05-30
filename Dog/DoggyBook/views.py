@@ -15,13 +15,7 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
 from .models import *
-<<<<<<< HEAD
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import DetailView
-
-=======
 from django.db.models import Q
->>>>>>> 573e2b26ba886ddfedb1b81af49dff2fad6ea8ac
 
 # Pour l'image dans le rapport
 
@@ -227,13 +221,8 @@ def modifC(request):
 def supprC(request):
     c = Chien.objects.get(id=int(request.POST['id']))
     c.delete()
-<<<<<<< HEAD
 
-    txt='/doggybook/profil/' + str(u.id)
-=======
-  
     txt='/doggybook/profil/' + str(request.user.id)
->>>>>>> 573e2b26ba886ddfedb1b81af49dff2fad6ea8ac
     return redirect(txt)
 
 def log(request):
@@ -265,45 +254,8 @@ def arbres(request,key):
         enfants = Chien.objects.filter(mere=objet)
     return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
 
-<<<<<<< HEAD
-
-
-# def gallery(request, key):
-#     list = photos.objects.all()
-#     paginator = Paginator(list, 10)
-#
-#     page = request.GET.get('page')
-#     try:
-#         albums = paginator.page(page)
-#     except PageNotAnInteger:
-#         albums = paginator.page(1)
-#     except EmptyPage:
-#         albums = paginator.page(paginator.num_pages)
-#
-#     return render(request, 'gallery.html', { 'albums': list })
-
-# class AlbumDetail(DetailView):
-#      model = Photo
-
-def get_context_data(request, key):
-         objet = Photo.objects.get(id=int(key))
-         chiens = objet.chien.model_pic.all()
-         return render(request, 'DoggyBook/album_detail.html', {'objet':objet,'chiens':chiens})
-
-
-    #  def get_context_data(self, **kwargs):
-    #     # Call the base implementation first to get a context
-    #     context = super(photos, self).get_context_data(**kwargs)
-    #     # Add in a QuerySet of all the images
-    #     context['images'] = photos.objects.get(album=self.object.id)
-    #     return context
-
-def handler404(request):
-    assert isinstance(request, HttpRequest)
-    return render(request, 'handler404.html', None, None, 404)
-=======
 def recherche(request,obj):
-    rech = request.GET['search']
+    rech = request.POST['search']
     filtre = request.GET['but']
     chiens = Chien.objects.filter(nom__icontains=rech)
     races = Race.objects.filter(nom__icontains=rech)
@@ -319,6 +271,3 @@ def recherche(request,obj):
     for p3 in ps3:
         users.append(User.objects.get(id=p3))
     return render(request,'DoggyBook/recherche.html', {'chiens':chiens,'races':races,'users':users,'filtre':filtre})
-
-
->>>>>>> 573e2b26ba886ddfedb1b81af49dff2fad6ea8ac

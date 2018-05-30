@@ -39,6 +39,8 @@ SECRET_KEY = get_env_variable('SECRET_KEY', 'o%d5umc!pt4tlwb!_y8k5khr4)0dp)f)cw!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+APPEND_SLASH=True
+
 ALLOWED_HOSTS = []
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyBEVeAu18W1F4WfPePFIbOWP34yyvUVcVs'
