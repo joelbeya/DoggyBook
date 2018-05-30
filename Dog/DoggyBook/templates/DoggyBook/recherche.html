@@ -19,7 +19,7 @@ input[type=text] {
     font-size: 16px;
     background-color: white;
     background-image: url('../../static/img/recherche.svg');
-    background-position: 3px 8px; 
+    background-position: 3px 8px;
     background-size: 30px 30px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
@@ -76,10 +76,10 @@ body {
     </div>
     <img src="{% static 'img/chichi.jpg' %}" class="w3-circle" style="height:100px;width:100px">
     <div class="w3-section w3-bottombar w3-padding-16">
-        
+
        <form action="/doggybook/recherche/" method="get">
             <input type="text" name="search" placeholder="Rechercher">
-            <span class="w3-margin-right">Filtrer :</span> 
+            <span class="w3-margin-right">Filtrer :</span>
             <button class="w3-button w3-black" name="but" value="tous">TOUS</button>
             <button class="w3-button w3-white" name="but" value="chien"><i class="fa fa-diamond w3-margin-right"></i>Chien</button>
             <button class="w3-button w3-white w3-hide-small" name="but" value="race"><i class="fa fa-photo w3-margin-right"></i>Race</button>
@@ -87,7 +87,7 @@ body {
         </form>
         <br>
     </div>
-  
+
   <!-- First Photo Grid-->
   {% if filtre == "tous" or filtre == "chien" %}
   <div class="w3-row-padding">

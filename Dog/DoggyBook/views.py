@@ -255,7 +255,7 @@ def arbres(request,key):
     return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
 
 def recherche(request,obj):
-    rech = request.POST['search']
+    rech = request.GET['search']
     filtre = request.GET['but']
     chiens = Chien.objects.filter(nom__icontains=rech)
     races = Race.objects.filter(nom__icontains=rech)
