@@ -2,12 +2,20 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 from . import views
 from .models import *
+from django.conf.urls.static import static
+from django.conf import settings
+from django.views.generic.base import RedirectView
+from django.contrib import admin
+from django.conf.urls import include
 
 
 app_name='DoggyBook'
+admin.autodiscover()
 
 urlpatterns = [
 
+
+	url(r'^get_context_data/(?P<key>[0-9]*)$', views.get_context_data, name = 'get_context_data'),
 	url(r'^$', views.index, name='index'),
 	url(r'^upload_pic$', views.upload_pic, name = 'upload_pic'),
 	url(r'^upload_pic_user$', views.upload_pic_user, name = 'upload_pic_user'),
@@ -32,4 +40,6 @@ urlpatterns = [
 	url(r'^arbre/(?P<key>[0-9]*)$', views.arbre),
 	url(r'^arbres/(?P<key>[0-9]*)$', views.arbres),
    	url(r'^(?P<obj>[A-Za-z]*)$', views.requete),
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'app.views.handler404'

@@ -15,6 +15,9 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
 from .models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import DetailView
+
 
 # Pour l'image dans le rapport
 
@@ -180,7 +183,7 @@ def modifP(request):
     p.telephone=tel
     u.save()
     p.save()
-  
+
     txt='/doggybook/profil/' + str(u.id)
     return redirect(txt)
 
@@ -207,7 +210,7 @@ def modifC(request):
     c.mere=mere
     c.pere=pere
     c.save()
-  
+
     txt='/doggybook/profil/' + str(request.user.id)
     return redirect(txt)
 
@@ -215,7 +218,7 @@ def modifC(request):
 def supprC(request):
     c = Chien.objects.get(id=int(request.POST['idC']))
     c.delete()
-  
+
     txt='/doggybook/profil/' + str(u.id)
     return redirect(txt)
 
@@ -247,3 +250,39 @@ def arbres(request,key):
     else:
         enfants = Chien.objects.filter(mere=objet)
     return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
+
+
+
+# def gallery(request, key):
+#     list = photos.objects.all()
+#     paginator = Paginator(list, 10)
+#
+#     page = request.GET.get('page')
+#     try:
+#         albums = paginator.page(page)
+#     except PageNotAnInteger:
+#         albums = paginator.page(1)
+#     except EmptyPage:
+#         albums = paginator.page(paginator.num_pages)
+#
+#     return render(request, 'gallery.html', { 'albums': list })
+
+# class AlbumDetail(DetailView):
+#      model = Photo
+
+def get_context_data(request, key):
+         objet = Photo.objects.get(id=int(key))
+         chiens = objet.chien.model_pic.all()
+         return render(request, 'DoggyBook/album_detail.html', {'objet':objet,'chiens':chiens})
+
+
+    #  def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super(photos, self).get_context_data(**kwargs)
+    #     # Add in a QuerySet of all the images
+    #     context['images'] = photos.objects.get(album=self.object.id)
+    #     return context
+
+def handler404(request):
+    assert isinstance(request, HttpRequest)
+    return render(request, 'handler404.html', None, None, 404)
