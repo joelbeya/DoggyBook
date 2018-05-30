@@ -15,6 +15,7 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from .forms import ImageUploadForm, ImageUploadForm_chien, ImageUploadForm_user
 from .models import *
+from django.db.models import Q
 
 # Pour l'image dans le rapport
 
@@ -94,9 +95,17 @@ def user(request, key):
     chiens = objet.proprio.chiens.all()
     return render(request, 'DoggyBook/profil.html', {'objet':objet,'chiens':chiens})
 
+def proprietaires(request):
+    objets = Proprietaire.all()
+    return render(request, 'DoggyBook/proprietaires.html', {'objets':objets})
+
 def race(request):
     objets = Race.all()
     return render(request, 'DoggyBook/race.html', {'objets':objets})
+
+def chiens(request):
+    objets = Chien.all()
+    return render(request, 'DoggyBook/chiens.html', {'objets':objets})
 
 def chien(request,key):
     objet = Chien.objects.get(id=int(key))
@@ -247,3 +256,23 @@ def arbres(request,key):
     else:
         enfants = Chien.objects.filter(mere=objet)
     return render(request,'DoggyBook/gene.html', {'objet':objet,'fraternite':fraternite,'enfants':enfants})
+
+def recherche(request,obj):
+    rech = request.GET['search']
+    filtre = request.GET['but']
+    chiens = Chien.objects.filter(nom__icontains=rech)
+    races = Race.objects.filter(nom__icontains=rech)
+    ps = User.objects.filter(last_name__contains=rech)
+    ps2 = User.objects.filter(first_name__contains=rech)
+    ps3 = []
+    users = []
+    for p in ps:
+        ps3.append(p.id)
+    for p2 in ps2:
+        if ps3.count(p2.id) != 1:
+            ps3.append(p2.id)
+    for p3 in ps3:
+        users.append(User.objects.get(id=p3))
+    return render(request,'DoggyBook/recherche.html', {'chiens':chiens,'races':races,'users':users,'filtre':filtre})
+
+

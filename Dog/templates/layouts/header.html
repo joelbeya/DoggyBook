@@ -74,13 +74,13 @@ body {
     <img src="{% static 'img/chichi.jpg' %}" class="w3-circle" style="height:100px;width:100px">
     <div class="w3-section w3-bottombar w3-padding-16">
         
-        <form action="/doggybook/recherche" method="post">
+        <form action="/doggybook/recherche/" method="get">
             <input type="text" name="search" placeholder="Rechercher">
             <span class="w3-margin-right">Filtrer :</span> 
-            <button class="w3-button w3-black">ALL</button>
-            <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Chien</button>
-            <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Race</button>
-            <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Proprietaire</button>
+            <button class="w3-button w3-black" name="but" value="tous">TOUS</button>
+            <button class="w3-button w3-white" name="but" value="chien"><i class="fa fa-diamond w3-margin-right"></i>Chien</button>
+            <button class="w3-button w3-white w3-hide-small" name="but" value="race"><i class="fa fa-photo w3-margin-right"></i>Race</button>
+            <button class="w3-button w3-white w3-hide-small" name="but" value="proprio"><i class="fa fa-map-pin w3-margin-right"></i>Proprietaire</button>
         </form>
         <br>
     </div>
@@ -100,13 +100,13 @@ body {
         <div class="w3-display-container mySlides">
             <img src="{% static 'img/dogo1.jpeg' %}" style="width:100%">
             <div class="content">
-                <h1>Liste des chiens</h1>
+                <a href="/doggybook/chiens"><h1>Liste des chiens</h1></a>
             </div>
         </div>
         <div class="w3-display-container mySlides">
             <img src="{% static 'img/liste_proprio.jpg' %}" style="width:100%">
             <div class="content">
-                <h1>Liste des proprietaires</h1>
+                <a href="/doggybook/proprietaires"><h1>Liste des proprietaires</h1></a>
             </div>
         </div>
     </div>

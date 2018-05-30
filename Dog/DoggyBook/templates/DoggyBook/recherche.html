@@ -1,0 +1,150 @@
+{% block content %}
+{% load static %}
+
+{% include 'layouts/head.html' %}
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+input[type=text] {
+    width: 330px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../../static/img/recherche.svg');
+    background-position: 3px 8px; 
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 50%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    font-size: 17px;
+}
+
+.container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.container img {vertical-align: middle;}
+
+.container .content {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+}
+
+.blanc {
+    color: white;
+}
+
+</style>
+<body class="w3-light-grey w3-content" style="max-width:1600px;margin-left:3px">
+
+    {% include 'layouts/_navbar.html' %}
+
+
+
+    <!-- Header -->
+    <br><br>
+    <div class="w3-panel">
+        <h1><b>Résultat de la recherche</b></h1>
+    </div>
+    <img src="{% static 'img/chichi.jpg' %}" class="w3-circle" style="height:100px;width:100px">
+    <div class="w3-section w3-bottombar w3-padding-16">
+        
+       <form action="/doggybook/recherche/" method="get">
+            <input type="text" name="search" placeholder="Rechercher">
+            <span class="w3-margin-right">Filtrer :</span> 
+            <button class="w3-button w3-black" name="but" value="tous">TOUS</button>
+            <button class="w3-button w3-white" name="but" value="chien"><i class="fa fa-diamond w3-margin-right"></i>Chien</button>
+            <button class="w3-button w3-white w3-hide-small" name="but" value="race"><i class="fa fa-photo w3-margin-right"></i>Race</button>
+            <button class="w3-button w3-white w3-hide-small" name="but" value="proprio"><i class="fa fa-map-pin w3-margin-right"></i>Proprietaire</button>
+        </form>
+        <br>
+    </div>
+  
+  <!-- First Photo Grid-->
+  {% if filtre == "tous" or filtre == "chien" %}
+  <div class="w3-row-padding">
+    <h1> Les chiens : </h1>
+  	{% for chien in chiens %}
+       <a href="/doggybook/chien/{{chien.id}}">
+        <div class="w3-third w3-container w3-margin-bottom w3-center">
+            {% if chien.photo_profil.url is not None %}
+            <p class="w3-center"><img src="{{chien.photo_profil.url}}" alt="Photo_profil_chien_{{chien.nom}}" style="height:106px;width:106px" class="w3-circle"></p>
+            {% endif %}
+            <div class="w3-container w3-white w3-center"><b>{{chien.nom}}</b></div>
+        </div>
+        </a>
+      </div>
+      {% empty %}
+      <p><b>Aucun résultat</b></p>
+    {% endfor %}
+    {% endif %}
+
+    {% if filtre == "tous" or filtre == "race" %}
+    <div class="w3-row-padding">
+    <h1> Les races : </h1>
+      {% for race in races %}
+        <div class="w3-third w3-container w3-margin-bottom w3-center">
+            {% if race.photo_profil.url is not None %}
+            <p class="w3-center"><img src="{{race.photo_profil.url}}" alt="Photo_profil" style="height:106px;width:106px" class="w3-circle"></p>
+            {% endif %}
+            <div class="w3-container w3-white w3-center"><b>{{race.nom}}</b></div>
+        </div>
+     </div>
+     {% empty %}
+      <p><b>Aucun résultat</b></p>
+    {% endfor %}
+    {% endif %}
+
+    {% if filtre == "tous" or filtre == "proprio" %}
+    <div class="w3-row-padding">
+    <h1> Les propriétaires : </h1>
+    {% for u in users %}
+    <a href="/doggybook/profil/{{u.id}}">
+        <div class="w3-third w3-container w3-margin-bottom w3-center">
+            {% if u.proprio.photo_profil.url is not None %}
+            <p class="w3-center"><img src="{{u.proprio.photo_profil.url}}" alt="Photo_profil" style="height:106px;width:106px" class="w3-circle"></p>
+            {% endif %}
+            <div class="w3-container w3-white w3-center"><b>{{u.last_name}}{{u.first_name}}</b></div>
+        </div>
+        </a>
+      </div>
+     {% empty %}
+      <p><b>Aucun résultat</b></p>
+    {% endfor %}
+    {% endif %}
+
+
+    {% include 'layouts/script.html' %}
+
+    {% endblock content %}
+    {% include 'layouts/footer.html' %}
+</body>
+</html>
