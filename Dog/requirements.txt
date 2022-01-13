@@ -22,7 +22,7 @@ gis==0.2.1
 gunicorn==19.8.1
 idna==2.6
 ndg-httpsclient==0.5.0
-Pillow==5.1.0
+Pillow==9.0.0
 psycopg2==2.7.4
 psycopg2-binary==2.7.4
 pusher==2.0.1
